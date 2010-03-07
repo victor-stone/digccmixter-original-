@@ -1,3 +1,4 @@
+<?
 /*
 * Artistech Media has made the contents of this file
 * available under a CC-GNU-GPL license:
@@ -13,6 +14,19 @@
 * represent and warrant to Artistech Media that your use
 * of dig.ccMixter software will comply with the CC-GNU-GPL.
 *
-* $Id: ie6.css 14176 2010-02-27 04:53:42Z fourstones $
+* $Id: index.php 14212 2010-03-05 13:03:44Z fourstones $
 *
 */
+
+error_reporting(E_ALL);
+
+global $DIG_ROOT_URL;
+global $MIXTER_ROOT_DIR;
+global $QUERY_ROOT_URL;
+global $QUERY_PROXY_URL;
+
+$page = empty($_REQUEST['page']) ? 'home' : $_REQUEST['page'];
+    
+require_once('pages/'.$page.'.php');
+
+?>

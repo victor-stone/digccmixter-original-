@@ -1,28 +1,27 @@
-
-function makeA(iterable) {
-  if (!iterable) return [];
-  if (iterable.toArray) {
-    return iterable.toArray();
-  } else {
-    var results = [];
-    for (var i = 0, length = iterable.length; i < length; i++)
-      results.push(iterable[i]);
-    return results;
-  }
-}
+ /*
+* Artistech Media has made the contents of this file
+* available under a CC-GNU-GPL license:
+*
+* http://creativecommons.org/licenses/GPL/2.0/
+*
+* A copy of the full license can be found as part of this
+* distribution in the file LICENSE.TXT.
+* 
+* You may use dig.ccMixter software in accordance with the
+* terms of that license. You agree that you are solely 
+* responsible for your use of dig.ccMixter software and you
+* represent and warrant to Artistech Media that your use
+* of dig.ccMixter software will comply with the CC-GNU-GPL.
+*
+* $Id: ccm-query.js 14217 2010-03-07 17:38:08Z fourstones $
+*
+*/
 
 var ccmClass = {
   create: function() {
     return function() {
       this.initialize.apply(this, arguments);
     }
-  }
-}
-
-Function.prototype.bind = function() {
-  var __method = this, args = makeA(arguments), object = args.shift();
-  return function() {
-    return __method.apply(object, args.concat(makeA(arguments)));
   }
 }
 
@@ -68,7 +67,6 @@ ccmQuery.prototype = {
     //
     // options = {
     //     paging: true|false,                   // default is false
-    //     parent: 'YOUR_PARENT_SELECTOR',   // container selector for this query
     //     debug: true|false                 // dumps ajax URL right before calling
     //  }
     //
@@ -104,30 +102,42 @@ ccmQuery.prototype = {
         this._options = options;
         this._parameters = fields;
         this._user_func = func;
+        if( !this._options.mode )
+          this._options.mode = 'ajax';          
     },
 
     // public
     
     query: function () {
       
-        this._clear_values();
-        this.values.num_results = 0;
+      this._clear_values();
+      this.values.num_results = 0;
 
-        this._get_params();
-        
-        if( this._options.paging && !this._count_fetched )
-          this._call_ccm( 'count', this._on_count_return.bind(this) );
+      this._get_params();
+      
+      if( this._options.mode == 'ajax' ) {
+        if( this._options.paging && !this._count_fetched  )
+          this._call_ccm( 'count', this._on_count_return );
         else
-          this._call_ccm( 'js', this._on_query_return.bind(this) );
+          this._call_ccm( 'js', this._on_query_return );
+      }
+      else {
+        this._call_ccm('js');
+      }
     },
     
     page: function(dir) {
         var newOffs = parseInt(this.values.offset) + (dir * parseInt(this.values.limit));
         if( newOffs < 0 )
             newOffs = 0;
-        this.values.offset = this._parameters.offset = newOffs;
-        this._get_params();
-        this.query();
+        if( this._options.mode == 'ajax' ) {            
+          this.values.offset = this._parameters.offset = newOffs;
+          this._get_params();
+          this.query();
+        }
+        else {
+          document.location = this._options.pagination_url + newOffs;
+        }
     },
 
     // query values filled in after a query is made.
@@ -135,8 +145,8 @@ ccmQuery.prototype = {
 
     // private
     
-    _rootURL: '/api/query?',
-    _proxyURL: 'ccm_query_proxy.php?q=http://ccmixter.org',
+    _rootURL: QUERY_ROOT_URL,
+    _proxyURL: QUERY_PROXY_URL, 
     _count_fetched: false,
     
     _parameters: {},
@@ -155,28 +165,6 @@ ccmQuery.prototype = {
       }
     },
     
-    _flatten_obj: function(obj,target,path)
-    {
-        var pathChar = path ? '/' : '';
-    
-        for( field in obj )
-        {
-            var this_path = path + pathChar + field;
-            
-            if( typeof(obj[field]) == 'object' )
-            {
-                target = this._flatten_obj(obj[field],target,this_path)
-            }
-            else
-            {
-                target[this_path] = obj[field];
-            }
-        }
-        
-        return target;
-        
-    },
-
     _on_count_return: function(data)
     {
         // data from 'count' format is
@@ -184,22 +172,17 @@ ccmQuery.prototype = {
         var val = eval(data);
         this.values.total = parseInt(val[0]);
         this._count_fetched = true;
-        this._call_ccm( 'js', this._on_query_return.bind(this) );
+        this._call_ccm( 'js', this._on_query_return ); // .bind(this) );
     },
     
     _on_query_return: function(data)
     {
-        var resp = eval(data);
-        var targets = [];
+        var targets = eval(data);
         var i;
-        for( i = 0; i < resp.length; i++  )
+        for( i = 0; i < targets.length; i++  )
         {
-            var target = {};
-            var obj = resp[i];
-            if( obj.files )
-                obj.num_files = obj.files.length;
-            target = this._flatten_obj(obj,target,'');
-            targets.push(target);
+            if( targets[i].files )
+                targets[i].num_files = targets[i].files.length;
         }
     
         this.values.num_results = targets.length;
@@ -209,33 +192,14 @@ ccmQuery.prototype = {
           this.values.offset = parseInt(this.values.offset);
         }
         
-        this._user_func(targets);
+        this._user_func.call(this,targets);
     },
 
     _get_params: function() {
         this._params = '';
-        var parent = this._options.parent ? $(this._options.parent) : null;
         for( var f in this._parameters )
         {
-            var field = $( '#' + f, parent );
-            var val = null;
-            var is_field = false;
-            
-            if( field && field.val )
-            {
-              var val_test = field.val();
-              if( typeof(val_test) != 'undefined' )
-              {
-                is_field = true;
-                if( val_test != this._parameters[f] )
-                  val = val_test
-              }
-            }
-            
-            if( !is_field )
-            {
-              val = this._parameters[f];
-            }
+            val = this._parameters[f];
             if( val )
                 this._params += '&' + f + '=' + val;
             this.values[f] = val;
@@ -246,21 +210,38 @@ ccmQuery.prototype = {
 
         var url = this._rootURL + 'f=' + format + this._params;
         
-        if( this._proxyURL )
+        switch( this._options.mode )
         {
-            url = this._proxyURL + escape(url);
-        }
-
-        if( this._options.debug )
-          dlink(url);
+          case 'ajax':
+            {
+              var url = this._rootURL + 'f=' + format + this._params;
+              
+              if( this._proxyURL )
+              {
+                  url = this._proxyURL + escape(url);
+              }
+      
+              if( this._options.debug )
+                dlink(url);
+                  
+              var me = this;
+              jQuery.ajax({
+                          type: "POST",
+                          url: url,
+                          data: {},
+                          dataType: 'html',
+                          success: function(data) { func.call(me,data) }
+                          });
+              
+              break;
+            }
             
-    
-        jQuery.ajax({
-                    type: "POST",
-                    url: url,
-                    data: {},
-                    dataType: 'html',
-                    success: func
-                    });
+          case 'server':
+          case 'remote':
+            {
+              document.location = url;
+              break;
+            }
+        }
     }
 }

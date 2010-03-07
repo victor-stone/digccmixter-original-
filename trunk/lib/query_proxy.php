@@ -1,98 +1,43 @@
 <?
-error_reporting(E_ALL);
-$qurl = urldecode($_GET['q']);
-$retval = load($qurl);
-print $retval;
-exit;
+/*
+* Artistech Media has made the contents of this file
+* available under a CC-GNU-GPL license:
+*
+* http://creativecommons.org/licenses/GPL/2.0/
+*
+* A copy of the full license can be found as part of this
+* distribution in the file LICENSE.TXT.
+* 
+* You may use dig.ccMixter software in accordance with the
+* terms of that license. You agree that you are solely 
+* responsible for your use of dig.ccMixter software and you
+* represent and warrant to Artistech Media that your use
+* of dig.ccMixter software will comply with the CC-GNU-GPL.
+*
+* $Id: query_proxy.php 14211 2010-03-02 21:27:07Z fourstones $
+*
+*/
 
-function d($x)
+
+require_once('../config.php');
+
+define('CC_HOST_CMD_LINE', 1 );      // define this exact way
+chdir( $MIXTER_ROOT_DIR );           // must be run from the cchost install root dir
+$NO_EXTRANEOUS_OUTPUT = 1;           // supress tagline of this file (OPTIONAL)
+require_once( 'cc-cmd-line.inc' );  
+
+require_once( 'cchost_lib/cc-query.php');
+
+$query = new CCQuery();
+
+$args = $query->ProcessUriArgs();
+
+if( $args['format'] != 'page' )
 {
-    var_dump($x);
-    exit;
+    $query->ProcessUri(); // this will exit
 }
 
-/**
- * See http://www.bin-co.com/php/scripts/load/
- * Version : 2.00.A
- */
-function load($url,$options=array()) {
-    
-    $default_options = array(
-        'method'        => 'get',
-        'return_info'    => false,
-        'return_body'    => true,
-        'referer'        => '',
-        'headers'        => array(),
-        'session'        => false,
-        'session_close'    => false,
-    );
-    // Sets the default options.
-    foreach($default_options as $opt => $value) {
-        if(!isset($options[$opt])) $options[$opt] = $value;
-    }
+chdir( dirname(__FILE__) . '/..' ); // chdir back to dig
 
-    $url_parts = parse_url($url);
 
-    $ch = false;
-    $info = array(
-        'http_code'    => 200
-    );
-    $response = '';
-    
-    $send_header = array(
-        'Accept' => 'text/*',
-        'User-Agent' => 'ccMixter query proxy'
-    );
-    
-
-    if(isset($url_parts['query'])) {
-        $page = $url_parts['path'] . '?' . str_replace(' ','%20',$url_parts['query']);
-    } else {
-        $page = $url_parts['path'];
-    }
-    
-    if(!isset($url_parts['port'])) $url_parts['port'] = 80;
-    $fp = fsockopen($url_parts['host'], $url_parts['port'], $errno, $errstr, 30);
-    if ($fp) {
-        $out = '';
-        $out .= "GET $page HTTP/1.0\r\n"; //HTTP/1.0 is much easier to handle than HTTP/1.1
-        $out .= "Host: $url_parts[host]\r\n";
-        $out .= "Accept: $send_header[Accept]\r\n";
-        $out .= "User-Agent: {$send_header['User-Agent']}\r\n";
-        $out .= "Connection: Close\r\n";
-        $out .= "\r\n";
-
-        fwrite($fp, $out);
-        while (!feof($fp)) {
-            $response1 = fgets($fp, 128);
-            $response .= $response1;
-        }
-        
-        fclose($fp);
-        /* start :vs: */
-        $size = 0;
-        $lines = explode("\n", $response);
-        foreach ($lines as $line) {
-            if( $line == '' || $line{0} == chr(13) )
-                break;
-            $size += strlen($line) + 1;
-        }
-        $info['header_size'] = $size;
-        /* end :vs: */
-     }
-
-    //Get the headers in an associative array
-    $headers = array();
-
-    if($info['http_code'] == 404) {
-        $body = "404";
-        $headers['Status'] = 404;
-    } else {
-        //Seperate header and content
-        $header_text = substr($response, 0, $info['header_size']);
-        $body = substr($response, $info['header_size']);
-    }
-    
-    return $body;
-} 
 ?>
