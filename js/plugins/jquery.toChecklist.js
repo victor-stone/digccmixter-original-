@@ -19,6 +19,10 @@
  * (http://hsc.unm.edu/library/) for funding the initial creation
  * of this plugin and allowing me to publish it as open source software.
 */
+
+// hacked by victor
+// $Id$
+
 (function($) {
 
 jQuery.fn.toChecklist = function(o) { // "o" stands for options
@@ -136,7 +140,7 @@ jQuery.fn.toChecklist = function(o) { // "o" stands for options
 		alert("jQuery Plugin Error (Plugin: toChecklist)\n\n"+msg);
 	}
 	
-	var overflowProperty = (o.addScrollBar)? 'overflow-y: auto; overflow-x: hidden;' : '';
+	//var overflowProperty = 'overflow-y: auto;'; // (o.addScrollBar)? 'overflow-y: auto; overflow-x: hidden;' : '';
 	var leaveRoomForCheckbox = (o.showCheckboxes)? 'padding-left: 25px' : 'padding-left: 3px';
 
 	// Here, THIS refers to the jQuery stack object that contains all the target elements that
@@ -348,6 +352,7 @@ jQuery.fn.toChecklist = function(o) { // "o" stands for options
 		// ============ Add styles =============
 
 		$(checklistDivId).addClass(o.cssChecklist);
+		$(checklistDivId).css('overflow','auto');
 		if (o.addScrollBar) {
 			$(checklistDivId).height(h - findInListDivHeight).width(w);
 		} else {

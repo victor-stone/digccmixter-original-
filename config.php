@@ -14,7 +14,7 @@
 * represent and warrant to Creative Commons that your use
 * of dig ccMixter software will comply with the CC-GNU-GPL.
 *
-* $Id: config.php 14173 2010-02-27 04:44:40Z fourstones $
+* $Id$
 *
 */
 

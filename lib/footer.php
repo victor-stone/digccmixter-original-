@@ -14,7 +14,7 @@
 * represent and warrant to Artistech Media that your use
 * of dig.ccMixter software will comply with the CC-GNU-GPL.
 *
-* $Id: footer.php 14184 2010-02-27 04:57:12Z fourstones $
+* $Id$
 *
 */
 ?>
