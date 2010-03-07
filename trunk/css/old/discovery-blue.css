@@ -1,0 +1,10 @@
+/** ------------------------------
+    Discovery Blue Theme Overrides
+    ------------------------------ */
+
+/** ------------------------------
+    HEADER
+    ------------------------------ */
+#header {
+	background: transparent url(../images/theme/discovery-blue/logo.png) left 20px no-repeat;
+}

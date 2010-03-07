@@ -1,0 +1,34 @@
+/** ------------------------------
+    Discovery Olive Theme Overrides
+    ------------------------------ */
+
+body {
+	background: #FFF url(../images/theme/discovery-olive/bg.jpg) top left repeat-x;
+}
+a {
+	color: #3399CC;
+}
+
+/** ------------------------------
+    HEADER
+    ------------------------------ */
+#header {
+	background: transparent url(../images/theme/discovery-olive/logo.png) left 20px no-repeat;
+}
+
+/** ------------------------------
+    NAV
+    ------------------------------ */
+#nav li a.current {
+	background-color: #B8BE6C;
+}
+#nav li a.current:hover {
+	background-color: #B8BE6C;
+}
+
+/** ------------------------------
+    CONTENT
+    ------------------------------ */
+.page h2 {
+	color: #B8BE6C;
+}
