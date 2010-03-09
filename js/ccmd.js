@@ -516,7 +516,7 @@ function result_usedby(result, num) {
 				+				'<a href="#" class="prev-link nowrap">&laquo; '+str_attribution+'</a>'
 	            +   		'</div>'
 	            +   		'<div class="next-link-container">'
-	            +   			'<a href="#" class="next-link nowrap">&ldquo;'+result['upload_name']+'&rdquo; Used By &raquo;</a>'
+	            +   			'<a href="#" class="next-link nowrap">Sample History &raquo;</a>'
 	            +   		'</div>'
 	            +   		'<div class="clearer"></div>'
 	            +		'</div>'
@@ -527,6 +527,12 @@ function result_usedby(result, num) {
 function result_history(result, num) {
 	var html = '<div class="item">'
 				+	'<h5>Sample History</h5>'
+	            +		'<div class="modal-nav-container">'
+	            +   		'<div class="prev-link-container">'
+				+				'<a href="#" class="prev-link nowrap">&laquo; '+str_back+'</a>'
+	            +   		'</div>'
+	            +   		'<div class="clearer"></div>'
+	            +		'</div>'
 				+	'</div>';
 	return html;	
 }
