@@ -824,8 +824,9 @@ function _resultsEvents() {
     
     // if( YAHOO.MediaPlayer && YAHOO.MediaPlayer.addTracks )
     //     YAHOO.MediaPlayer.addTracks(document.getElementById('results'), null, true);
-
+	
 	YAHOO.MediaPlayer.addTracks(document.getElementById('results'), null, true);
+	alert('_resultsEvents');
 }
 
 function _podcastsPageEvents() {
