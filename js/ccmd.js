@@ -394,7 +394,6 @@ function result_download(result, num) {
 }
 
 function result_info(result, num) {
-    console.log(result);
     var html = '<div class="item">'
              +   '<div class="info-header" style="background-image: url('+result['user_avatar_url']+');">'
              +     '<h5><a href="'+result['file_page_url']+'">'+result['upload_name']
