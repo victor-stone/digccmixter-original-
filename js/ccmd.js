@@ -57,7 +57,7 @@ var str_podcasts = 'Podcasts';
 var str_even_money   = 'even if you make money with your project';
 var str_except_money = '(except where money is involved)';
 var str_license_your = 'license your project in the same way as %upload_name% and';
-
+var str_other_files = 'Other project files:'
 
 /*
     ADVANCED UTILITY
@@ -308,29 +308,31 @@ function build_podcast_result(result, num, max_name_length) {
 }
 
 function result_actions(num) {
-    return '<ul class="result-actions"><li><a href="#" class="download-link" id="download-'+num+
-            '"><span>Download</span></a></li><li><a href="#" class="info-link" id="info-'+num+
-            '"><span>Info</span></a></li></ul>';
+    return   '<ul class="result-actions">'
+            +   '<li><a href="#" class="download-link" id="download-'+num+'">'
+            +      '<span>Download</span></a>'
+            +    '</li>'
+            +    '<li><a href="#" class="info-link" id="info-'+num+'">'
+            +       '<span>Info</span></a>'
+            +    '</li>'
+            + '</ul>';
 }
 
-function result_heading(result, num, max_name_length, featured) {
-    var html = '';
+function result_heading(result, num, max_name_length, featured) {    
 
-    if(featured) {
-        html += '<h4><a href="'+result.files[0].download_url+'">'+
-                safe_upload_name(result['upload_name'], max_name_length)+'</a> </h4>';
-        html += '<span class="result-creator">by <a href="'+result['artist_page_url']+'">'+
-                result['user_real_name']+'</a></span> <div class="license" id="license-'+num+
-                '"><a href="'+result['license_url']+'"><img src="'+license_image(result['license_tag'])+
-                '" alt="'+result['license_name']+' Creative Commons License" /></a></div>';
-    } else {
-        html += '<h4><a href="'+result.files[0].download_url+'">'+
-                safe_upload_name(result['upload_name'], max_name_length)+
-                '</a> <span class="result-creator">'+str_by+' <a href="'+result['artist_page_url']+'">'+
-                result['user_real_name']+'</a></span> <div class="license" id="license-'+num+'"><a href="'+
-                result['license_url']+'"><img src="'+license_image(result['license_tag'])+'" alt="'+
-                result['license_name']+' Creative Commons License" /></a></div></h4>';
-    }
+    html = "\n"
+         + '<h4><a href="'+result.files[0].download_url+'">'
+         +      safe_upload_name(result['upload_name'], max_name_length)+'</a> '
+         +  (featured ? '</h4>' : '')
+         +  '<span class="result-creator">'+ str_by + ' <a href="'+result['artist_page_url']+'">'
+         +     result['user_real_name']+'</a></span> '
+         +  '<div class="license" id="license-'+num+'">'
+         +     '<a href="'+result['license_url']+'">'
+         +         '<img src="'+license_image(result['license_tag'])+'" alt="'+result['license_name']+' Creative Commons License" />'
+         +     '</a>'
+         +  '</div>'
+         + (featured ? '' : '</h4>')
+         + "\n";
 
     return html;    
 }
@@ -356,9 +358,27 @@ function result_download(result, num) {
     var i = 0;
     while(i < file_count) {
         F = result.files[i];
-        html += '<li><a href="'+F.download_url+'">'+
-                F.file_name +'</a> (<strong>'+ F.file_format_info['default-ext'] +
-                '</strong> '+clean_filesize(F.file_filesize)+')</li>';
+        
+        if( i == 0 )
+        {
+            html += '<li><a href="'+F.download_url+'">'+
+                    F.file_name +'</a> (<strong>'+ F.file_nicname +
+                    '</strong> '+clean_filesize(F.file_filesize)+')';
+            
+            if( file_count > 1 )
+            {
+                html += '<p class="other_project_files">' + str_other_files + '</p>';
+            }
+            
+            html += '</li>'
+        }
+        else
+        {
+            html += '<li><a href="'+F.download_url+'">'+
+                    F.file_nicname +'</a> ('+clean_filesize(F.file_filesize)+')';
+            
+        }
+        
         i++;
     }
     html += '</ol>';
@@ -373,13 +393,15 @@ function result_download(result, num) {
 }
 
 function result_info(result, num) {
-    var html = '<div class="item">';
-
-    html += '<div class="info-header" style="background-image: url('+result['user_avatar_url']+');">';
-    html += '<h5><a href="'+result['file_page_url']+'">'+result['upload_name']+
-            '</a> <span class="length">'+result.files[0].file_format_info.ps+'</span></h5>';
-    html += '<h6>by <a href="'+result['artist_page_url']+'">'+result['user_real_name']+'</a></h6>';
-    html += '<ul class="meta">';
+    
+    var html = '<div class="item">'
+             +   '<div class="info-header" style="background-image: url('+result['user_avatar_url']+');">'
+             +     '<h5><a href="'+result['file_page_url']+'">'+result['upload_name']
+             +        '</a> <span class="length">'+result.files[0].file_format_info.ps+'</span>'
+             +     '</h5>'
+             +     '<h6>'+str_by+' <a href="'+result['artist_page_url']+'">'+result['user_real_name']+'</a></h6>'
+             +     '<ul class="meta">';
+             
     if(result['upload_extra/featuring'] != '') {        
         html += '<li><strong>'+str_featuring+':</strong> '+result['upload_extra/featuring']+'</li>';
     }
@@ -400,41 +422,51 @@ function result_info(result, num) {
     html += tag_list(result['upload_tags']);
     html += license_blurb(result);
     
-    html += '<div class="modal-nav-container"><div class="prev-link-container"><a href="#" class="prev-link nowrap">&laquo; '+
-            str_download + '</a></div><div class="next-link-container">'+ str_you_already_have +
-            safe_upload_name(result['upload_name'], 24)+'&rdquo;&hellip; <a href="#" class="next-link nowrap">'+
-            str_more +' &raquo;</a></div><div class="clearer"></div></div>';
+    html += '<div class="modal-nav-container">'
+         +    '<div class="prev-link-container">'
+         +       '<a href="#" class="prev-link nowrap">&laquo; ' + str_download + '</a>'
+         +     '</div>'
+         +     '<div class="next-link-container">'+ str_you_already_have + safe_upload_name(result['upload_name'], 24)+'&rdquo;&hellip; '
+         +          '<a href="#" class="next-link nowrap">'+ str_more +' &raquo;</a></div><div class="clearer">'
+         +     '</div>'
+         +  '</div>';
     
     html += '</div>';
+    
     return html;
 }
 
 function result_permission(result, num) {
-    var html = '<div class="item">';
-    html += '<h5>'+str_permission+'</h5>';
-    html += '<p>You want to use &ldquo;'+result['upload_name']+
-            '&rdquo; by <a href="'+result['artist_page_url']+'/profile"><strong>'+
-            result['user_real_name']+'</strong></a>' +
-            ' in a project, like a video, podcast, school project, album? You already have permission to copy, ' +
-            'distribute, remix and embed it into your project '+
-            commercial_clause(result['license_tag'])+
-            ' as long as you '+share_alike_clause(result['license_tag'])+
-            ' give proper credit to <a href="'+result['artist_page_url']+'/profile"><strong>'+
-            result['user_real_name']+'</strong></a>. Please read the ' +
-            '<a href="'+result['license_url']+'">Creative Commons '+result['license_name']+' license</a>' +
-            ' for more details and context.</p><p>If you&rsquo;d like to do something with &ldquo;'+
-            result['upload_name']+'&rdquo; that isn&rsquo;t part of the permissions you already have, ' +
-            'you need to get permission directly from <a href="'+result['artist_page_url']+'/profile"><strong>'+
-            result['user_real_name']+'</strong></a>.</p>';
+    var html = '<div class="item">'
+             +   '<h5>'+str_permission+'</h5>'
+             +      '<p>You want to use &ldquo;'+result['upload_name']+ '&rdquo; by '
+             +          '<a href="'+result['artist_page_url']+'/profile"><strong>'+result['user_real_name']+'</strong></a>'
+             +         ' in a project, like a video, podcast, school project, album? You already have permission to copy, '
+             +         'distribute, remix and embed it into your project '+ commercial_clause(result['license_tag'])
+             +         ' as long as you '+share_alike_clause(result['license_tag'])
+             +         ' give proper credit to '
+             +         '<a href="'+result['artist_page_url']+'/profile"><strong>'+result['user_real_name']+'</strong></a>. '
+             +         'Please read the ' + 
+             +         '<a href="'+result['license_url']+'">Creative Commons '+result['license_name']+' license</a>'
+             +         ' for more details and context.</p><p>If you&rsquo;d like to do something with &ldquo;'
+             +         result['upload_name']+'&rdquo; that isn&rsquo;t part of the permissions you already have, '
+             +         'you need to get permission directly from '
+             +         '<a href="'+result['artist_page_url']+'/profile"><strong>'+ result['user_real_name']+'</strong></a>.'
+             +      '</p>'
+             +      '<p>'
+             +          '<a href="'+result['artist_page_url']+'/profile">'+str_artist_contact_info+'</a>'
+             +      '</p>'
+             +      '<div class="modal-nav-container">'
+             +          '<div class="prev-link-container">'
+             +            '<a href="#" class="prev-link nowrap">&laquo; '+str_info+'</a>'
+             +           '</div>'
+             +           '<div class="next-link-container">' +
+             +               str_suggestions_on +' <a href="#" class="next-link nowrap">'+str_click_here+' &raquo;</a>'
+             +           '</div>'
+             +           '<div class="clearer"></div>'
+             +      '</div>'
+             + '</div>';
     
-    html += '<p><a href="'+result['artist_page_url']+'/profile">'+str_artist_contact_info+'</a></p>';
-    
-    html += '<div class="modal-nav-container"><div class="prev-link-container">'+
-            '<a href="#" class="prev-link nowrap">&laquo; '+str_info+'</a></div><div class="next-link-container">' +
-            str_suggestions_on +' <a href="#" class="next-link nowrap">'+str_click_here+
-            ' &raquo;</a></div><div class="clearer"></div></div>';
-    
-    html += '</div>';
     return html;
 }
 
