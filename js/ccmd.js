@@ -294,12 +294,12 @@ function slidebox_events(slidebox) {
 	var history_link = items.find('.history-link');
 	if(usedby_link) {
 		usedby_link.click(function(e) {
-			slidebox_change_panel(slidebox, 3);
+			slidebox_change_panel(slidebox, 2);
 		});
 	}
 	if(history_link) {
 		history_link.click(function(e) {
-			slidebox_change_panel(slidebox, 4);
+			slidebox_change_panel(slidebox, 2);
 		});		
 	}
 }
