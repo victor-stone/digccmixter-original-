@@ -29,6 +29,7 @@
     YAHOO! MEDIA PLAYER CONFIGURATION
 */
 var YMPParams = {
+	parse: false,
     defaultalbumart: DIG_ROOT_URL + '/images/default-cover.jpg'
 };
 
