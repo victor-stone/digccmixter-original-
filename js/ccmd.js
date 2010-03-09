@@ -71,7 +71,7 @@ function onClearTag() {
     return false;
 }
 
-function doRemoveTag(tag) {    
+function doRemoveTag(tag) {
     $('#tagpicker input[value='+tag+']').attr('checked','');
     tagChecked();
 }
@@ -343,6 +343,8 @@ function result_slidebox(result, num) {
     html += result_info(result, num);
     html += result_permission(result, num);
     html += result_attribution(result, num);
+	html += result_usedby(result, num);
+	html += result_history(result, num);
     html += '</div>';
     return html;
 }
@@ -494,7 +496,10 @@ function result_attribution(result, num) {
             + '<p class="attribution-snippet-fmt">' + snippet + '</p>'
             + '<div class="modal-nav-container">'
             +   '<div class="prev-link-container">'
-            +      '<a href="#" class="prev-link nowrap">&laquo; '+str_back+'</a>'
+			+		'<a href="#" class="prev-link nowrap">&laquo; '+ str_you_already_have + safe_upload_name(result.upload_name, 24)+'&rdquo;&hellip; '+str_more +'</a>'
+            +   '</div>'
+            +   '<div class="next-link-container">' +
+            +   	'<a href="#" class="next-link nowrap">&ldquo;'+result.upload_name+'&rdquo; Used By &raquo;</a>'
             +   '</div>'
             +   '<div class="clearer"></div>'
             + '</div>';
@@ -503,7 +508,30 @@ function result_attribution(result, num) {
     return html;
 }
 
-function attribution(result) {    
+function result_usedby(result, num) {
+	var html = 		'<div class="item">'
+				+		'<h5>&ldquo;'+result.upload_name+'&rdquo; Used By</h5>'
+	            +		'<div class="modal-nav-container">'
+	            +   		'<div class="prev-link-container">'
+				+				'<a href="#" class="prev-link nowrap">&laquo; '+str_suggestions_on+' '+str_click_here+'</a>'
+	            +   		'</div>'
+	            +   		'<div class="next-link-container">' +
+	            +   			'<a href="#" class="next-link nowrap">&ldquo;'+result.upload_name+'&rdquo; Used By &raquo;</a>'
+	            +   		'</div>'
+	            +   		'<div class="clearer"></div>'
+	            +		'</div>';
+				+ 	'</div>';
+	return html;	
+}
+
+function result_history(result, num) {
+	var html = '<div class="item">'
+				+	'<h5>Sample History</h5>'
+				+	'</div>';
+	return html;	
+}
+
+function attribution(result) {
     var attrHtml = '<a rel="license" href="%license_url%"><img alt="Creative Commons License" style="border-width:0" src="%cc_img%" /></a> '
                  + '<span xmlns:dc="http://purl.org/dc/elements/1.1/" href="http://purl.org/dc/dcmitype/Sound" property="dc:title" rel="dc:type">%upload_name%</span> by <a xmlns:cc="http://creativecommons.org/ns#" href="%file_page_url%" property="cc:attributionName" rel="cc:attributionURL">%user_real_name%</a> is licensed under a <a rel="license" href="%license_url%">%license_name%</a>.';
     

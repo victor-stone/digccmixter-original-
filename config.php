@@ -18,8 +18,8 @@
 *
 */
 
-$DIG_ROOT_URL      = 'http://digccmixter';
-$MIXTER_ROOT_DIR   =  dirname(__FILE__) . '/..';
+$DIG_ROOT_URL      = 'http://ccdev19.dreamhosters.com';
+$MIXTER_ROOT_DIR   =  '/home/ccdev15/ccdev15';
 $QUERY_ROOT_URL    =  $DIG_ROOT_URL . '/api/query?';
 $QUERY_PROXY_URL   = '';
 
