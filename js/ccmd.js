@@ -499,7 +499,7 @@ function result_attribution(result, num) {
 			+		'<a href="#" class="prev-link nowrap">&laquo; Permission</a>'
             +   '</div>'
             +   '<div class="next-link-container">'
-            +   	'<a href="#" class="next-link nowrap">&ldquo;'+result['upload_name']+'&rdquo; Used By &raquo;</a>'
+            +   	'<a href="#" class="next-link nowrap">Used By &raquo;</a>'
             +   '</div>'
             +   '<div class="clearer"></div>'
             + '</div>';
