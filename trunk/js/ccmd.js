@@ -317,6 +317,8 @@ function slidebox_change_panel(slidebox, dir) {
 	} else {
 		items.animate({'marginLeft':"+="+(totalWidth*Math.abs(dir))}, animSpeed);
 	}
+	
+	alert(Math.abs(dir));
 }
 
 function build_result(result, num, max_name_length, featured) {
