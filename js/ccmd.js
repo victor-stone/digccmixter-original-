@@ -394,7 +394,7 @@ function result_download(result, num) {
 }
 
 function result_info(result, num) {
-    
+    console.log(result);
     var html = '<div class="item">'
              +   '<div class="info-header" style="background-image: url('+result['user_avatar_url']+');">'
              +     '<h5><a href="'+result['file_page_url']+'">'+result['upload_name']
@@ -413,7 +413,9 @@ function result_info(result, num) {
     if(result['upload_extra/nsfw'] == 'true') {
         html += '<li class="warning">NSFW</li>';
     }
-	html += '<li><a href="/api/query?t=upload_histogram&ids=">Remix History</a></li>';
+	html += '<li><a href="">Artist Profile</a></li>';
+	html += '<li><a href="">Sample History</a></li>';
+	html += '<li><a href="">I used this track in a project</a></li>';
     html += '</ul>';
     html += '</div>';
     
