@@ -413,8 +413,7 @@ function result_info(result, num) {
     if(result['upload_extra/nsfw'] == 'true') {
         html += '<li class="warning">NSFW</li>';
     }
-	html += '<li><a href="#" class="usedby-link">Used By</a></li>';
-	html += '<li><a href="#" class="history-link">Samples</a></li>';
+	html += '<li><a href="/api/query?t=upload_histogram&ids=">Remix History</a></li>';
     html += '</ul>';
     html += '</div>';
     
