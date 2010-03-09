@@ -413,10 +413,12 @@ function result_info(result, num) {
     if(result['upload_extra/nsfw'] == 'true') {
         html += '<li class="warning">NSFW</li>';
     }
-	html += '<li><a href="">Artist Profile</a></li>';
-	html += '<li><a href="">Sample History</a></li>';
-	html += '<li><a href="">I used this track in a project</a></li>';
     html += '</ul>';
+	html += '<ul class="meta">';
+	html += '<li><a href="" class="button-link">Artist Profile</a></li>';
+	html += '<li><a href="" class="button-link">Sample History</a></li>';
+	html += '<li><a href="" class="button-link">I used this track in a project</a></li>';
+	html += '</ul>';
     html += '</div>';
     
     if(result['upload_description_plain']) {
