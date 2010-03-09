@@ -822,11 +822,10 @@ function _resultsEvents() {
  
     _hookupEvents.call(this);
     _hookupPagination.call(this)
-    
-    // if( YAHOO.MediaPlayer && YAHOO.MediaPlayer.addTracks )
-        YAHOO.MediaPlayer.addTracks(document.getElementById('results'), null, true);
-	
+
 	alert('_resultsEvents');
+    // if( YAHOO.MediaPlayer && YAHOO.MediaPlayer.addTracks )
+	YAHOO.MediaPlayer.addTracks(document.getElementById('results'), null, true);
 }
 
 function _podcastsPageEvents() {
