@@ -446,7 +446,7 @@ function result_permission(result, num) {
              +         ' as long as you '+share_alike_clause(result['license_tag'])
              +         ' give proper credit to '
              +         '<a href="'+result['artist_page_url']+'/profile"><strong>'+result['user_real_name']+'</strong></a>. '
-             +         'Please read the ' + 
+             +         'Please read the ' 
              +         '<a href="'+result['license_url']+'">Creative Commons '+result['license_name']+' license</a>'
              +         ' for more details and context.</p><p>If you&rsquo;d like to do something with &ldquo;'
              +         result['upload_name']+'&rdquo; that isn&rsquo;t part of the permissions you already have, '
@@ -460,7 +460,7 @@ function result_permission(result, num) {
              +          '<div class="prev-link-container">'
              +            '<a href="#" class="prev-link nowrap">&laquo; '+str_info+'</a>'
              +           '</div>'
-             +           '<div class="next-link-container">' +
+             +           '<div class="next-link-container">' 
              +               str_suggestions_on +' <a href="#" class="next-link nowrap">'+str_click_here+' &raquo;</a>'
              +           '</div>'
              +           '<div class="clearer"></div>'
