@@ -513,7 +513,7 @@ function result_usedby(result, num) {
 				+		'<h5>&ldquo;'+result['upload_name']+'&rdquo; Used By</h5>'
 	            +		'<div class="modal-nav-container">'
 	            +   		'<div class="prev-link-container">'
-				+				'<a href="#" class="prev-link nowrap">&laquo; '+str_click_here+'</a> '+str_suggestions_on
+				+				'<a href="#" class="prev-link nowrap">&laquo; '+str_attribution+'</a>'
 	            +   		'</div>'
 	            +   		'<div class="next-link-container">'
 	            +   			'<a href="#" class="next-link nowrap">&ldquo;'+result['upload_name']+'&rdquo; Used By &raquo;</a>'
