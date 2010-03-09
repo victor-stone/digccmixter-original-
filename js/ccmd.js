@@ -289,12 +289,12 @@ function slidebox(id, panel) {
 }
 
 function slidebox_events(slidebox) {
-	var usedby_link = items.find('.usedby-link');
-	if(usedby_link) {
+	// var usedby_link = items.find('.usedby-link');
+	// if(usedby_link) {
 		// usedby_link.click(function(e) {
 		// 	
 		// });
-	}
+	// }
 }
 
 function slidebox_change_panel(slidebox, dir) {
@@ -304,8 +304,6 @@ function slidebox_change_panel(slidebox, dir) {
     var totalWidth = (width+15);
 	var animSpeed = 250;
     var height = parent.height();
-
-	var items = slidebox.find('.item');
 	
 	if(dir < 0) {
 		items.animate({'marginLeft':"-="+(totalWidth*Math.abs(dir))}, animSpeed);
