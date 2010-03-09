@@ -509,26 +509,26 @@ function result_attribution(result, num) {
 }
 
 function result_usedby(result, num) {
-	var html = 		'<div class="item">'
-				+		'<h5>&ldquo;'+result.upload_name+'&rdquo; Used By</h5>'
-	            +		'<div class="modal-nav-container">'
-	            +   		'<div class="prev-link-container">'
-				+				'<a href="#" class="prev-link nowrap">&laquo; '+str_suggestions_on+' '+str_click_here+'</a>'
-	            +   		'</div>'
-	            +   		'<div class="next-link-container">' +
-	            +   			'<a href="#" class="next-link nowrap">&ldquo;'+result.upload_name+'&rdquo; Used By &raquo;</a>'
-	            +   		'</div>'
-	            +   		'<div class="clearer"></div>'
-	            +		'</div>';
-				+ 	'</div>';
-	return html;	
+	// var html = 		'<div class="item">'
+	// 			+		'<h5>&ldquo;'+result.upload_name+'&rdquo; Used By</h5>'
+	//             +		'<div class="modal-nav-container">'
+	//             +   		'<div class="prev-link-container">'
+	// 			+				'<a href="#" class="prev-link nowrap">&laquo; '+str_suggestions_on+' '+str_click_here+'</a>'
+	//             +   		'</div>'
+	//             +   		'<div class="next-link-container">' +
+	//             +   			'<a href="#" class="next-link nowrap">&ldquo;'+result.upload_name+'&rdquo; Used By &raquo;</a>'
+	//             +   		'</div>'
+	//             +   		'<div class="clearer"></div>'
+	//             +		'</div>';
+	// 			+ 	'</div>';
+	// return html;	
 }
 
 function result_history(result, num) {
-	var html = '<div class="item">'
-				+	'<h5>Sample History</h5>'
-				+	'</div>';
-	return html;	
+	// var html = '<div class="item">'
+	// 			+	'<h5>Sample History</h5>'
+	// 			+	'</div>';
+	// return html;	
 }
 
 function attribution(result) {
