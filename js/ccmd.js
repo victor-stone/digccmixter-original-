@@ -822,8 +822,8 @@ function _resultsEvents() {
     _hookupEvents.call(this);
     _hookupPagination.call(this)
     
-    // if( YAHOO.MediaPlayer && YAHOO.MediaPlayer.addTracks )
-    //     YAHOO.MediaPlayer.addTracks(document.getElementById('results'), null, true);
+    if( YAHOO.MediaPlayer && YAHOO.MediaPlayer.addTracks )
+        YAHOO.MediaPlayer.addTracks(document.getElementById('results'), null, true);
 }
 
 function _podcastsPageEvents() {
@@ -968,11 +968,11 @@ function _digStyleResultsEvents(target) {
 
 	// var result_headings = jQuery(target+'.result h4');
 	// result_headings.each(function(i) {
-		// if( YAHOO.MediaPlayer && YAHOO.MediaPlayer.addTracks ) // TODO: Why is this null (sometimes)?
-		// 	        YAHOO.MediaPlayer.addTracks(document.getElementById(target), null, false);
+		if( YAHOO.MediaPlayer && YAHOO.MediaPlayer.addTracks ) // TODO: Why is this null (sometimes)?
+			YAHOO.MediaPlayer.addTracks(document.getElementById(target), null, false);
 	
 		// YAHOO.MediaPlayer.addTracks(document.getElementById(target), null, false);
-        // YAHOO.MediaPlayer.addTracks($(this).get(0), null, false);
+		//         YAHOO.MediaPlayer.addTracks($(this).get(0), null, false);
 	// });
 }
 
