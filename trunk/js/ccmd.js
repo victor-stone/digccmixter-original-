@@ -964,15 +964,16 @@ function _hookupEvents()
 function _digStyleResultsEvents(target) {
     _hookupEvents.call(this);
     
-    // target = target.replace('#','');
+    target = target.replace('#','');
 
-	var result_headings = jQuery(target+'.result h4');
-	result_headings.each(function(i) {
+	// var result_headings = jQuery(target+'.result h4');
+	// result_headings.each(function(i) {
 		if( YAHOO.MediaPlayer && YAHOO.MediaPlayer.addTracks ) // TODO: Why is this null (sometimes)?
-	        YAHOO.MediaPlayer.addTracks($(this).get(0), null, false);
+	        YAHOO.MediaPlayer.addTracks(document.getElementById(target), null, false);
 	
 		// YAHOO.MediaPlayer.addTracks(document.getElementById(target), null, false);
-	});
+        // YAHOO.MediaPlayer.addTracks($(this).get(0), null, false);
+	// });
 }
 
 function progress_indicator() {
