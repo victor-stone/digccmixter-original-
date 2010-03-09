@@ -682,7 +682,8 @@ function query_results(results) {
     
     $('#results').html(html);
 
-    _resultsEvents.call(this);
+    // _resultsEvents.call(this);
+	_resultsEvents();
 }
 
 function didUMean_results(results) {
@@ -822,10 +823,9 @@ function _resultsEvents() {
     _hookupEvents.call(this);
     _hookupPagination.call(this)
     
-    // if( YAHOO.MediaPlayer && YAHOO.MediaPlayer.addTracks )
-    //     YAHOO.MediaPlayer.addTracks(document.getElementById('results'), null, true);
+    if( YAHOO.MediaPlayer && YAHOO.MediaPlayer.addTracks )
+        YAHOO.MediaPlayer.addTracks(document.getElementById('results'), null, true);
 	
-	YAHOO.MediaPlayer.addTracks(document.getElementById('results'), null, true);
 	alert('_resultsEvents');
 }
 
