@@ -29,7 +29,7 @@
     YAHOO! MEDIA PLAYER CONFIGURATION
 */
 var YMPParams = {
-	parse: false,
+	// parse: false,
     defaultalbumart: DIG_ROOT_URL + '/images/default-cover.jpg'
 };
 
@@ -823,9 +823,8 @@ function _resultsEvents() {
     _hookupEvents.call(this);
     _hookupPagination.call(this)
 
-	alert('_resultsEvents');
     // if( YAHOO.MediaPlayer && YAHOO.MediaPlayer.addTracks )
-	YAHOO.MediaPlayer.addTracks(document.getElementById('results'), null, true);
+	// YAHOO.MediaPlayer.addTracks(document.getElementById('results'), null, true);
 }
 
 function _podcastsPageEvents() {
@@ -966,12 +965,12 @@ function _hookupEvents()
 function _digStyleResultsEvents(target) {
     _hookupEvents.call(this);
     
-    target = target.replace('#','');
+    // target = target.replace('#','');
 
 	// var result_headings = jQuery(target+'.result h4');
 	// result_headings.each(function(i) {
-		if( YAHOO.MediaPlayer && YAHOO.MediaPlayer.addTracks ) // TODO: Why is this null (sometimes)?
-			YAHOO.MediaPlayer.addTracks(document.getElementById(target), null, false);
+		// if( YAHOO.MediaPlayer && YAHOO.MediaPlayer.addTracks ) // TODO: Why is this null (sometimes)?
+		// 	YAHOO.MediaPlayer.addTracks(document.getElementById(target), null, false);
 	
 		// YAHOO.MediaPlayer.addTracks(document.getElementById(target), null, false);
 		//         YAHOO.MediaPlayer.addTracks($(this).get(0), null, false);
