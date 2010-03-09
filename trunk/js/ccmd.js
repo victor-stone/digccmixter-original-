@@ -289,12 +289,19 @@ function slidebox(id, panel) {
 }
 
 function slidebox_events(slidebox) {
-	// var usedby_link = items.find('.usedby-link');
-	// if(usedby_link) {
-		// usedby_link.click(function(e) {
-		// 	
-		// });
-	// }
+	var items = slidebox.find('.item');
+	var usedby_link = items.find('.usedby-link');
+	var history_link = items.find('.history-link');
+	if(usedby_link) {
+		usedby_link.click(function(e) {
+			slidebox_change_panel(slidebox, 3);
+		});
+	}
+	if(history_link) {
+		history_link.click(function(e) {
+			slidebox_change_panel(slidebox, 4);
+		});		
+	}
 }
 
 function slidebox_change_panel(slidebox, dir) {
@@ -443,6 +450,8 @@ function result_info(result, num) {
     if(result['upload_extra/nsfw'] == 'true') {
         html += '<li class="warning">NSFW</li>';
     }
+	html += '<li><a href="#" class="usedby-link">Used By</a></li>';
+	html += '<li><a href="#" class="history-link">Samples</a></li>';
     html += '</ul>';
     html += '</div>';
     
