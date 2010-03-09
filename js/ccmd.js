@@ -972,7 +972,6 @@ function _digStyleResultsEvents(target) {
 		// if( YAHOO.MediaPlayer && YAHOO.MediaPlayer.addTracks ) // TODO: Why is this null (sometimes)?
 		// 	YAHOO.MediaPlayer.addTracks(document.getElementById(target), null, false);
 	
-		// YAHOO.MediaPlayer.addTracks(document.getElementById(target), null, false);
 		//         YAHOO.MediaPlayer.addTracks($(this).get(0), null, false);
 	// });
 }
