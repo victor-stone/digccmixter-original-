@@ -496,10 +496,10 @@ function result_attribution(result, num) {
             + '<p class="attribution-snippet-fmt">' + snippet + '</p>'
             + '<div class="modal-nav-container">'
             +   '<div class="prev-link-container">'
-			+		'<a href="#" class="prev-link nowrap">&laquo; '+ str_you_already_have + safe_upload_name(result.upload_name, 24)+'&rdquo;&hellip; '+str_more +'</a>'
+			+		'<a href="#" class="prev-link nowrap">&laquo; Permission</a>'
             +   '</div>'
             +   '<div class="next-link-container">' +
-            +   	'<a href="#" class="next-link nowrap">&ldquo;'+result.upload_name+'&rdquo; Used By &raquo;</a>'
+            +   	'<a href="#" class="next-link nowrap">&ldquo;'+result['upload_name']+'&rdquo; Used By &raquo;</a>'
             +   '</div>'
             +   '<div class="clearer"></div>'
             + '</div>';
@@ -510,13 +510,13 @@ function result_attribution(result, num) {
 
 function result_usedby(result, num) {
 	var html = 		'<div class="item">'
-				+		'<h5>&ldquo;'+result.upload_name+'&rdquo; Used By</h5>'
+				+		'<h5>&ldquo;'+result['upload_name']+'&rdquo; Used By</h5>'
 	            +		'<div class="modal-nav-container">'
 	            +   		'<div class="prev-link-container">'
 				+				'<a href="#" class="prev-link nowrap">&laquo; '+str_suggestions_on+' '+str_click_here+'</a>'
 	            +   		'</div>'
 	            +   		'<div class="next-link-container">' +
-	            +   			'<a href="#" class="next-link nowrap">&ldquo;'+result.upload_name+'&rdquo; Used By &raquo;</a>'
+	            +   			'<a href="#" class="next-link nowrap">&ldquo;'+result['upload_name']+'&rdquo; Used By &raquo;</a>'
 	            +   		'</div>'
 	            +   		'<div class="clearer"></div>'
 	            +		'</div>'
