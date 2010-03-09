@@ -318,7 +318,7 @@ function slidebox_change_panel(slidebox, dir) {
 		items.animate({'marginLeft':"+="+(totalWidth*Math.abs(dir))}, animSpeed);
 	}
 	
-	alert(totalWidth*Math.abs(dir));
+	alert(totalWidth);
 }
 
 function build_result(result, num, max_name_length, featured) {
