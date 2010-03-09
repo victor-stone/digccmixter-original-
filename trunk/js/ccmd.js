@@ -275,48 +275,13 @@ function slidebox(id, panel) {
     
     var next_links = items.find('.next-link');
     next_links.click(function(e) {
-		slidebox_change_panel(slidebox, -1);
-        // items.animate({'marginLeft':"-="+totalWidth}, animSpeed);
+        items.animate({'marginLeft':"-="+totalWidth}, animSpeed);
     });
     
     var prev_links = items.find('.prev-link');
     prev_links.click(function(e) {
-		slidebox_change_panel(slidebox, 1);
-        // items.animate({'marginLeft':"+="+totalWidth}, animSpeed);
+        items.animate({'marginLeft':"+="+totalWidth}, animSpeed);
     });
-
-	slidebox_events(slidebox);
-}
-
-function slidebox_events(slidebox) {
-	var items = slidebox.find('.item');
-	var usedby_link = items.find('.usedby-link');
-	var history_link = items.find('.history-link');
-	if(usedby_link) {
-		usedby_link.click(function(e) {
-			slidebox_change_panel(slidebox, 2);
-		});
-	}
-	if(history_link) {
-		history_link.click(function(e) {
-			slidebox_change_panel(slidebox, 2);
-		});		
-	}
-}
-
-function slidebox_change_panel(slidebox, dir) {
-    var items = slidebox.find('.item');
-    var parent = items.parent();
-    var width = (parent.width()-10);
-    var totalWidth = (width+15);
-	var animSpeed = 250;
-    var height = parent.height();
-	
-	if(dir < 0) {
-		items.animate({'marginLeft':"-="+(totalWidth*Math.abs(dir))}, animSpeed);
-	} else {
-		items.animate({'marginLeft':"+="+(totalWidth*Math.abs(dir))}, animSpeed);
-	}
 }
 
 function build_result(result, num, max_name_length, featured) {
@@ -379,8 +344,6 @@ function result_slidebox(result, num) {
     html += result_info(result, num);
     html += result_permission(result, num);
     html += result_attribution(result, num);
-	html += result_usedby(result, num);
-	html += result_history(result, num);
     html += '</div>';
     return html;
 }
@@ -534,45 +497,13 @@ function result_attribution(result, num) {
             + '<p class="attribution-snippet-fmt">' + snippet + '</p>'
             + '<div class="modal-nav-container">'
             +   '<div class="prev-link-container">'
-			+		'<a href="#" class="prev-link nowrap">&laquo; Permission</a>'
-            +   '</div>'
-            +   '<div class="next-link-container">'
-            +   	'<a href="#" class="next-link nowrap">Used By &raquo;</a>'
+			+		'<a href="#" class="prev-link nowrap">&laquo; '+str_back+'</a>'
             +   '</div>'
             +   '<div class="clearer"></div>'
             + '</div>';
             
     html += '</div>';
     return html;
-}
-
-function result_usedby(result, num) {
-	var html = 		'<div class="item">'
-				+		'<h5>&ldquo;'+result['upload_name']+'&rdquo; Used By</h5>'
-	            +		'<div class="modal-nav-container">'
-	            +   		'<div class="prev-link-container">'
-				+				'<a href="#" class="prev-link nowrap">&laquo; '+str_attribution+'</a>'
-	            +   		'</div>'
-	            +   		'<div class="next-link-container">'
-	            +   			'<a href="#" class="next-link nowrap">Sample History &raquo;</a>'
-	            +   		'</div>'
-	            +   		'<div class="clearer"></div>'
-	            +		'</div>'
-				+ 	'</div>';
-	return html;	
-}
-
-function result_history(result, num) {
-	var html = '<div class="item">'
-				+	'<h5>Sample History</h5>'
-	            +		'<div class="modal-nav-container">'
-	            +   		'<div class="prev-link-container">'
-				+				'<a href="#" class="prev-link nowrap">&laquo; '+str_back+'</a>'
-	            +   		'</div>'
-	            +   		'<div class="clearer"></div>'
-	            +		'</div>'
-				+	'</div>';
-	return html;	
 }
 
 function attribution(result) {
