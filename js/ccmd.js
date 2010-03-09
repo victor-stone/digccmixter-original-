@@ -322,7 +322,7 @@ function result_actions(num) {
 function result_heading(result, num, max_name_length, featured) {    
 
     html = "\n"
-         + '<h4><a href="'+result.files[0].download_url+'">'
+         + '<h4 id="result-heading-'+num+'"><a href="'+result.files[0].download_url+'">'
          +      safe_upload_name(result['upload_name'], max_name_length)+'</a> '
          +  (featured ? '</h4>' : '')
          +  '<span class="result-creator">'+ str_by + ' <a href="'+result['artist_page_url']+'">'
@@ -394,7 +394,7 @@ function result_download(result, num) {
 }
 
 function result_info(result, num) {
-
+    console.log(result);
     var html = '<div class="item">'
              +   '<div class="info-header" style="background-image: url('+result['user_avatar_url']+');">'
              +     '<h5><a href="'+result['file_page_url']+'">'+result['upload_name']
@@ -547,8 +547,6 @@ function license_image(license_tag) {
     return lic_meta[license_tag].img;
 }
 
-
-
 function tag_list(tags) {
     var tag_array = tags.split(",");
     var html = '<ul class="tags">';
@@ -679,7 +677,7 @@ function query_results(results) {
         html += build_result(result, i, 64);
         html += '</div>';
     }
-
+    
     html += build_pagination.call(this);
     
     $('#results').html(html);
