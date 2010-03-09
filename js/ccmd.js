@@ -313,10 +313,8 @@ function slidebox_change_panel(slidebox, dir) {
     var height = parent.height();
 	
 	if(dir < 0) {
-		alert('< 0');
 		items.animate({'marginLeft':"-="+(totalWidth*Math.abs(dir))}, animSpeed);
 	} else {
-		alert('> 0');
 		items.animate({'marginLeft':"+="+(totalWidth*Math.abs(dir))}, animSpeed);
 	}
 }
