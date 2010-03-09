@@ -404,7 +404,8 @@ function result_info(result, num) {
              +     '<h6>'+str_by+' <a href="'+result['artist_page_url']+'">'+result['user_real_name']+'</a></h6>'
              +     '<ul class="meta">';
              
-    if(result['upload_extra/featuring'] != '') {        
+    // if(result['upload_extra/featuring'] != '') {        
+    if(result['upload_extra/featuring']) {        
         html += '<li><strong>'+str_featuring+':</strong> '+result['upload_extra/featuring']+'</li>';
     }
     if(result['upload_extra/bpm'] != '') {
