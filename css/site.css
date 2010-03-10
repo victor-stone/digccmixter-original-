@@ -881,6 +881,7 @@ ol.download-list {
 }
 
 .attribution-example {
+	margin-left: 20%;
 	line-height: 1.35em;
     font-family: serif;
 }
