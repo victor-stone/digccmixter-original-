@@ -809,6 +809,10 @@ a:active.download-link, a:active.info-link {
 	border: 1px solid #E1E2E5;
 }
 
+.download-list-container {
+	overflow: auto;
+	height: 250px;
+}
 ol.download-list {
 	border: 1px dotted red;
 	margin-left: 2em;

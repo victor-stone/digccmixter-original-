@@ -354,7 +354,7 @@ function result_download(result, num) {
     html += '<h5>'+str_download+' <em>'+result['upload_name']+'</em></h5>';
     html += '<p class="note">'+str_IE_right+'<br />'+str_mac_control+'</p>';
     
-    html += '<ol class="download-list">';
+    html += '<div class="download-list-container"><ol class="download-list">';
     // loop through files
     var file_count = result['num_files'];
     var i = 0;
@@ -383,7 +383,7 @@ function result_download(result, num) {
         
         i++;
     }
-    html += '</ol>';
+    html += '</ol></div>';
     
     html += license_blurb(result);
     
