@@ -58,6 +58,9 @@ var str_even_money   = 'even if you make money with your project';
 var str_except_money = '(except where money is involved)';
 var str_license_your = 'license your project in the same way as %upload_name% and';
 var str_other_files = 'Other project files:'
+var str_sample_history = 'Sample History';
+var str_artist_profile = 'Artist Profile';
+var str_i_used_this = 'I Used This Track... (trackback)';
 
 /*
     ADVANCED UTILITY
@@ -411,12 +414,26 @@ function result_info(result, num) {
     html += '<li><strong>'+str_uploaded+':</strong> '+result['upload_date_format']+'</li>';
     if(result['upload_extra/nsfw'] == 'true') {
         html += '<li class="warning">NSFW</li>';
-    }
+    }    
     html += '</ul>';
-	html += '<ul class="meta">';
-	html += '<li><a href="" class="button-link">Artist Profile</a></li>';
-	html += '<li><a href="" class="button-link">Sample History</a></li>';
-	html += '<li><a href="" class="button-link">I used this track in a project</a></li>';
+    
+    //sigh
+    
+    var CCM_QUERY_ROOT = 'http://ccdevmac/api/query?';
+    
+    var tb_url = CCM_QUERY_ROOT
+               + 't=trackback_page&ids=' + result.upload_id
+               + '&title=Submit a Trackback'
+               + '&returl=' + encodeURIComponent(document.location)
+               + '&rett=dig.ccMixter';
+               
+    var history_url = CCM_QUERY_ROOT + 't=upload_histogram&ids=' + result.upload_id;
+    
+	html += '<ul class="meta">'
+          + '<li>@ccMixter:</li>'
+	html += '<li><a href="' + result.artist_page_url + '" class="button-link">' + str_artist_profile + '</a></li>';
+	html += '<li><a href="' + history_url + '" class="button-link">' + str_sample_history + '</a></li>';
+	html += '<li><a href="' + tb_url + '" class="button-link">' + str_i_used_this + '</a></li>';
 	html += '</ul>';
     html += '</div>';
     
