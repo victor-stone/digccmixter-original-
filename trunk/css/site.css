@@ -811,6 +811,7 @@ a:active.download-link, a:active.info-link {
 
 ol.download-list {
 	border: 1px dotted red;
+	margin-left: 2em;
 }
 
 
