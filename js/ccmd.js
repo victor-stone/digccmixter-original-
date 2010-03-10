@@ -419,15 +419,13 @@ function result_info(result, num) {
     
     //sigh
     
-    var CCM_QUERY_ROOT = 'http://ccdevmac/api/query?';
-    
-    var tb_url = CCM_QUERY_ROOT
+    var tb_url = CCM_QUERY_URL
                + 't=trackback_page&ids=' + result.upload_id
                + '&title=Submit a Trackback'
                + '&returl=' + encodeURIComponent(document.location)
                + '&rett=dig.ccMixter';
                
-    var history_url = CCM_QUERY_ROOT + 't=upload_histogram&ids=' + result.upload_id;
+    var history_url = CCM_QUERY_URL + 't=upload_histogram&ids=' + result.upload_id;
     
 	html += '<ul class="meta">'
           + '<li>@ccMixter:</li>'

@@ -25,6 +25,7 @@ $js =<<<EOF
 var DIG_ROOT_URL      =  '{$DIG_ROOT_URL}';
 var QUERY_ROOT_URL    =  '{$QUERY_ROOT_URL}';
 var QUERY_PROXY_URL   =  '{$QUERY_PROXY_URL}';
+var CCM_QUERY_URL     =  '{$CCM_QUERY_URL}';
 
 EOF;
 
