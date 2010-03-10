@@ -323,7 +323,7 @@ function result_actions(num) {
 function result_heading(result, num, max_name_length, featured) {    
 
     html = "\n"
-         + '<h4 id="result-heading-'+num+'"><a href="'+result.files[0].download_url+'">'
+         + '<h4><a href="'+result.files[0].download_url+'" class="htrack">'
          +      safe_upload_name(result['upload_name'], max_name_length)+'</a> '
          +  (featured ? '</h4>' : '')
          +  '<span class="result-creator">'+ str_by + ' <a href="'+result['artist_page_url']+'">'
