@@ -497,7 +497,7 @@ function result_attribution(result, num) {
             +   'If you have a web page you can use this code snippet:'
             + '<textarea class="attribution-snippet">' + snippet.replace('<','&lt;').replace('>','&gt;') + '</textarea>'
             + '</p>'
-            + '<p class="attribution-snippet-fmt round">' + snippet + '</p>'
+            + '<div class="center"><p class="attribution-snippet-fmt round">' + snippet + '</p></div>'
             + '<div class="modal-nav-container">'
             +   '<div class="prev-link-container">'
 			+		'<a href="#" class="prev-link nowrap">&laquo; '+str_back+'</a>'
