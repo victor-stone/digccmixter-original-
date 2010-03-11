@@ -104,7 +104,7 @@ class digQuery
                     }
                 }
                 
-                foreach( array('howididit','edpicks','usertags','ccud','systags','relative_dir') as $K )
+                foreach( array('howididit','edpicks','ccud','systags','relative_dir') as $K )
                 {
                     if( !empty($F['upload_extra'][$K]) )
                         unset($F['upload_extra'][$K]);
