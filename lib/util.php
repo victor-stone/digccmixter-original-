@@ -67,6 +67,7 @@ class digArgs
         }
     
         parse_str($this->query_str,$this->args);
+        strip_slash($this->args);
         $this->stripped = $this->args;
         $this->stripped_query_str = $this->stripped;
 

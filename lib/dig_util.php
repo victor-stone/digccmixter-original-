@@ -30,6 +30,7 @@ function prep_dig_query_args($digQuery)
         'dataview' => 'diginfo',
         'sort'    => 'rank',
         'limit'    => 10,
+        'search_type' => 'all',
         'tagexp'  => '(remix|contest_entry|conetest_source)',
     );
 
