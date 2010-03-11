@@ -324,11 +324,13 @@ function result_actions(num) {
 
 function result_heading(result, num, max_name_length, featured) {    
 
+    var user_url = DIG_ROOT_URL + '/dig?user=' + result.user_name;
+    
     html = "\n"
          + '<h4><a href="'+result.files[0].download_url+'" class="htrack">'
          +      safe_upload_name(result['upload_name'], max_name_length)+'</a> '
          +  (featured ? '</h4>' : '')
-         +  '<span class="result-creator">'+ str_by + ' <a href="'+result['artist_page_url']+'">'
+         +  '<span class="result-creator">'+ str_by + ' <a href="'+ user_url +'">'
          +     result['user_real_name']+'</a></span> '
          +  '<div class="license" id="license-'+num+'">'
          +     '<a href="'+result['license_url']+'">'
@@ -529,8 +531,9 @@ function attribution(result) {
     var attrHtml = '<a rel="license" href="%license_url%"><img alt="Creative Commons License" style="border-width:0" src="%cc_img%" /></a> '
                  + '<span xmlns:dc="http://purl.org/dc/elements/1.1/" href="http://purl.org/dc/dcmitype/Sound" property="dc:title" rel="dc:type">%upload_name%</span> by <a xmlns:cc="http://creativecommons.org/ns#" href="%file_page_url%" property="cc:attributionName" rel="cc:attributionURL">%user_real_name%</a> is licensed under a <a rel="license" href="%license_url%">%license_name%</a>.';
     
-    $.each(['upload_name','user_real_name','artist_page_url','license_name','license_url'],function(i,e) {
-        attrHtml = attrHtml.replace('%' + e + '%', result[e]); 
+    $.each(['upload_name','user_real_name','artist_page_url','license_name','license_url','file_page_url'],function(i,e) {
+        var regx = new RegExp('%' + e + '%','g');
+        attrHtml = attrHtml.replace(regx, result[e]); 
     });
 
     return attrHtml.replace('%cc_img%',cc_logo(result.license_tag));
