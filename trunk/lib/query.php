@@ -135,7 +135,8 @@ class digQuery
     function ProcessUriArgs()
     {
         global $DIG_ROOT_URL;
-        
+
+
         // these were as passed in the browser addr bar
         if( preg_match('%/([^?]+)(\?([^#]+))?%',strip_slash($_SERVER['REQUEST_URI']),$m)  )
         {
@@ -165,7 +166,7 @@ class digQuery
 
         // after translation by mod_rewrite:
         $this->raw_args = new digArgs(strip_slash($_GET), array('offset')); // SERVER['QUERY_STRING'],array('offset'));
-        
+
         // browser args take precedence
         if( empty($this->pretty_args) )
         {
@@ -175,6 +176,7 @@ class digQuery
         {
             $all = array_merge($this->raw_args->args,$this->pretty_args->args);
         }
+
         
         // seperate out the html page fields
         $this->_fields = array();

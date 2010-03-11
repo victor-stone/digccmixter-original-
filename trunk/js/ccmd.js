@@ -292,7 +292,7 @@ function build_result(result, num, max_name_length, featured) {
     html += result_heading(result, num, max_name_length, featured);
     html += '<div class="clearer"></div>';
     html += '<div class="license-details" id="license-details-'+num+'">'+
-                 str_you_already +' <a href="#" class="license-more">'+str_more+'</a></div>';
+                 str_you_already +' <a href="#" class="license-more" id="licmo_'+result.upload_id+'">'+str_more+'</a></div>';
     html += result_slidebox(result, num);
     return html;
 }
@@ -333,7 +333,7 @@ function result_heading(result, num, max_name_length, featured) {
          +  '<span class="result-creator">'+ str_by + ' <a href="'+ user_url +'">'
          +     result['user_real_name']+'</a></span> '
          +  '<div class="license" id="license-'+num+'">'
-         +     '<a href="'+result['license_url']+'">'
+         +     '<a href="'+result['license_url']+'" id="liclink_'+num+'">'
          +         '<img src="'+license_image(result['license_tag'])+'" alt="'+result['license_name']+' Creative Commons License" />'
          +     '</a>'
          +  '</div>'
@@ -891,6 +891,7 @@ function _hookupEvents()
     var download_links = jQuery(".download-link");
     var info_links = jQuery(".info-link");
     var license = jQuery('.license');
+    var license_more = jQuery('.license-more');
     
     /*
         adds a click action to all results' download links that brings up the download
@@ -943,38 +944,39 @@ function _hookupEvents()
     */
     license.find('a').hover(
         function() {
-            var id_num = jQuery(this).parent().attr("id").split("-")[1];
-            var result_info_id = "result-info-"+id_num;
-            var license_details_id = "license-details-"+id_num;
-            var license_details = jQuery('#'+license_details_id);
-            if(license_details.is(':hidden')) { 
-                license_details.slideDown();
-            }
+            var id_num = this.id.match(/[0-9]+$/)[0];
+            lic_hover_open(id_num);
         }, 
         function() {
-            var id_num = jQuery(this).parent().attr("id").split("-")[1];
-            var result_info_id = "result-info-"+id_num;
-            var license_details_id = "license-details-"+id_num;
-            var license_more = jQuery('#'+license_details_id).find(".license-more");
-            license_more.click(function(e) {
-                jQuery('#'+result_info_id).modal({
-                    opacity : 80, 
-                    onOpen : function(dialog) {
-                        dialog.overlay.fadeIn('fast', function() {
-                            dialog.container.fadeIn('fast', function() {
-                                dialog.data.fadeIn('fast');
-                                slidebox('#'+result_info_id, 3);
-                            });
-                        });
-                    },
-                    onClose : dialogCloser
-                });
-            });
-            
-            jQuery('#'+license_details_id).animate({opacity: 1.0}, 3000).slideUp();
+            var id_num = this.id.match(/[0-9]+$/)[0];            
+            jQuery('#license-details-'+id_num).animate({opacity: 1.0}, 3000).slideUp();
         }
     );
+
+    license_more.click( function() {
+        var id_num = this.id.match(/[0-9]+$/)[0];
+        var rinfo = jQuery('#result-info-'+id_num);
+        rinfo.modal({
+            opacity : 80, 
+            onOpen : function(dialog) {
+                dialog.overlay.fadeIn('fast', function() {
+                    dialog.container.fadeIn('fast', function() {
+                        dialog.data.fadeIn('fast');
+                        slidebox('#result-info-'+id_num, 3);
+                    });
+                });
+            },
+            onClose : dialogCloser
+        });
+    });
  
+}
+
+function lic_hover_open(id_num) {
+    var license_details = jQuery('#license-details-'+id_num);
+    if(license_details.is(':hidden')) { 
+        license_details.slideDown();
+    }
 }
 
 function _digStyleResultsEvents(target) {
