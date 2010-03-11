@@ -439,7 +439,9 @@ function result_info(result, num) {
         html += '<div class="item-description">'+result['upload_description_plain']+'</div>';
     }
     
-    html += tag_list(result['upload_tags']);
+    if( result.upload_extra.usertags )
+        html += tag_list(result.upload_extra.usertags);
+        
     html += license_blurb(result);
     
     html += '<div class="modal-nav-container">'
@@ -562,10 +564,11 @@ function license_image(license_tag) {
 }
 
 function tag_list(tags) {
-    var tag_array = tags.split(",");
+    var tag_array = tags.split(',');
     var html = '<ul class="tags">';
+    var url = DIG_ROOT_URL + '/dig?adv=1&dig-tags=';
     jQuery.each(tag_array, function() {
-        html += '<li><a href="">'+this+'</a></li>';
+        html += '<li><a href="' + url + this + '">'+this+'</a></li>';
     });
     html += '</ul><div class="clearer"></div>';
     return html;
