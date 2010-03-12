@@ -676,9 +676,12 @@ a.ymp-btn-page-play em.ymp-skin, a.ymp-btn-page-pause em.ymp-skin {
 .license {
 	display: inline;
 	margin-left: 6px;
-	color: #6B6C6E;
+	color: #555;
 }
-.license a, .result h4 .result-creator a, .license-details a,
+.license a {
+	color: #555;
+}
+.result h4 .result-creator a, .license-details a,
 .result-info h6, .result-info h6 a, .length {
 	color: #6B6C6E;
 }
@@ -739,17 +742,28 @@ a.ymp-btn-page-play em.ymp-skin, a.ymp-btn-page-pause em.ymp-skin {
 }
 .tags {
 	margin: 2em 0 .5em 0;
-}
-.tags {
 	text-align: right;
 }
 .tags li {
 	float: right;
 	list-style: none;
+	padding-bottom: .5em;
 }
 .tags li a {
+	border-radius: 4px;
+	-moz-border-radius: 4px;
+	-webkit-border-radius: 4px;
+	border: 1px solid #3A87BA;
 	margin-left: .5em;
+	color: #FFF;
+	background-color: #3399CC;
+	padding: 0 .5em;
+	text-decoration: none;
 }
+.tags li a:hover {
+	text-decoration: underline;
+}
+
 .result-info .license {
 	display: block;
 }
