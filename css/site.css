@@ -663,6 +663,10 @@ a:hover.download-link, a:hover.info-link {
 a:active.download-link, a:active.info-link {
 	background-position: 0 -28px;
 }
+a.ymp-btn-page-play em.ymp-skin, a.ymp-btn-page-pause em.ymp-skin {
+	top: 0 !important;
+	margin: 2px 0 !important;
+}
 .result-actions, .license, .license-details, .note {
 	font-size: .85em;
 }
@@ -906,4 +910,14 @@ textarea.attribution-snippet {
 }
 .slidebox .item {
 	overflow: hidden;
+}
+
+/** ------------------------------
+    SAFARI HACK. CAN YOU BELIEVE THAT WE STILL NEED TO USE HACKS???  :/
+    ------------------------------ */
+@media screen and (-webkit-min-device-pixel-ratio:0) {
+	a.ymp-btn-page-play em.ymp-skin, a.ymp-btn-page-pause em.ymp-skin {
+		top: 15% !important;
+		margin: 0 !important;
+	}
 }
