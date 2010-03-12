@@ -317,6 +317,9 @@ p.site-license {
 /** ------------------------------
     SEARCH UTILITY / RESULTS
     ------------------------------ */
+.dig-heading {
+	margin-top: .25em;
+}
 .search-utility {
 	background-color: #FFF;
 }
@@ -910,6 +913,13 @@ textarea.attribution-snippet {
 }
 .slidebox .item {
 	overflow: hidden;
+}
+
+/** ------------------------------
+    DEBUG
+    ------------------------------ */
+#debug {
+	display: none;
 }
 
 /** ------------------------------
