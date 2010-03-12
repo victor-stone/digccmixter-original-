@@ -292,7 +292,7 @@ function build_result(result, num, max_name_length, featured) {
     html += result_heading(result, num, max_name_length, featured);
     html += '<div class="clearer"></div>';
     html += '<div class="license-details" id="license-details-'+num+'">'+
-                 str_you_already +' <a href="#" class="license-more" id="licmo_'+result.upload_id+'">'+str_more+'</a></div>';
+                 str_you_already +' <a href="#" class="license-more" id="licmo_'+num+'">'+str_more+'</a></div>';
     html += result_slidebox(result, num);
     return html;
 }
@@ -678,24 +678,24 @@ function build_pagination(start_offset) {
 function query_results(results) {
     // here we have the results of the main query
     
-    // Builds your HTML here... 
+    // Builds your HTML here...
+    /*
     var diggingfor = $('#diggingfor').html();
     if(diggingfor) {
         var html = '<h3 id="diggingfor">'+$('#diggingfor').html()+'</h3>';
     } else {
         var html = '';
     }
+    */
+    var html = '';
     
     for(var i = 0; i < results.length; i++)
     {
         var result = results[i];
-        if((i%2) != 0) {
-            html += '<div class="result odd-result round">';
-        } else {
-            html += '<div class="result">';
-        }
-        html += build_result(result, i, 64);
-        html += '</div>';
+        var odd_result = ((i%2) != 0) ? ' odd-result ' : '';
+        html += '<div class="result '+odd_result+' round" id="result_'+i+'">'
+             + build_result(result, i, 64)
+             + '</div>';
     }
     
     html += build_pagination.call(this);
@@ -892,6 +892,7 @@ function _hookupEvents()
     var info_links = jQuery(".info-link");
     var license = jQuery('.license');
     var license_more = jQuery('.license-more');
+    var result_rows = jQuery('.result');
     
     /*
         adds a click action to all results' download links that brings up the download
@@ -944,12 +945,24 @@ function _hookupEvents()
     */
     license.find('a').hover(
         function() {
-            var id_num = this.id.match(/[0-9]+$/)[0];
-            lic_hover_open(id_num);
+            var id_num = parseInt(this.id.match(/[0-9]+$/)[0]);
+            if( page_opts.lic_open && (page_opts.lic_open == id_num ) )
+                return;
+            if( page_opts.timer )
+            {
+                clearTimeout(page_opts.timer);
+                page_opts.timer = null;
+            }
+            page_opts.opening_lic = id_num + 1;
+            page_opts.timer = window.setTimeout(function() { lic_hover_open(); }, 500 );
         }, 
+        null_func
+    );
+
+    result_rows.hover(
+        null_func, 
         function() {
-            var id_num = this.id.match(/[0-9]+$/)[0];            
-            jQuery('#license-details-'+id_num).animate({opacity: 1.0}, 3000).slideUp();
+            lic_hover_close(1000);
         }
     );
 
@@ -972,11 +985,35 @@ function _hookupEvents()
  
 }
 
-function lic_hover_open(id_num) {
+function null_func() { }
+
+function lic_hover_open() {
+    
+    if( !page_opts.opening_lic )
+        return;
+    
+    var id_num = page_opts.opening_lic - 1;
+    if( page_opts.lic_open )
+    {
+        lic_hover_close(100);
+    }
+    page_opts.opening_lic = 0;
     var license_details = jQuery('#license-details-'+id_num);
     if(license_details.is(':hidden')) { 
         license_details.slideDown();
     }
+    page_opts.lic_open = id_num + 1;
+    page_opts.opening_lic = 0;
+    page_opts.timer = null;
+}
+
+function lic_hover_close(spd) {
+    if( !page_opts.lic_open )
+        return;
+    var id_num = page_opts.lic_open - 1;
+    jQuery('#license-details-'+id_num).slideUp(); // animate({opacity: 1.0}, spd).slideUp();
+    page_opts.lic_open = 0;
+    page_opts.opening_lic = 0;
 }
 
 function _digStyleResultsEvents(target) {
