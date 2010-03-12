@@ -48,6 +48,8 @@ if( !isset($page_title) )
     <script src="js/jquery.js" type="text/javascript" charset="utf-8"></script>
     <script src="js/plugins/jquery.simplemodal.js" type="text/javascript" charset="utf-8"></script>
     <script src="http://mediaplayer.yahoo.com/js" type="text/javascript" charset="utf-8"></script>
+	<script src="http://github.com/oxchronxo/YMP/raw/master/ef.ymp.utilities.js" type="text/javascript"</script>
+	<script src="http://github.com/oxchronxo/YMP/raw/master/ef.ymp.trackSeek.js" type="text/javascript"></script>
     <script src="js/ccm-query.js" type="text/javascript" charset="utf-8"></script>
     <script src="js/ccmd.js" type="text/javascript" charset="utf-8"></script>
 <?
