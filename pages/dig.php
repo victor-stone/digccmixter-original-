@@ -85,7 +85,6 @@ require_once('lib/head.php');
 
 	<div id="content">
 		<div class="page full" id="dig">
-			<!-- <h2>dig</h2> -->
 			<div class="search-utility round">
 				<form action="#" >
 					<div class="search-input-container"><input type="text" name="dig-query" value="" id="dig-query" /></div>
@@ -187,7 +186,7 @@ require_once('lib/head.php');
             <?
                 if( !empty($page_title) )
                 {
-                    print "<h2>{$page_title}</h2>";
+                    print "<h2 class=\"dig-heading\">{$page_title}</h2>";
                 }
             ?>
 			<div id="didumean"></div>
