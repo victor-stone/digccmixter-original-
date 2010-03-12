@@ -22,5 +22,6 @@ $DIG_ROOT_URL      = 'http://ccdev19.dreamhosters.com';
 $MIXTER_ROOT_DIR   =  '/home/ccdev15/ccdev15';
 $QUERY_ROOT_URL    =  $DIG_ROOT_URL . '/api/query?';
 $QUERY_PROXY_URL   = '';
+$CCM_QUERY_URL     = 'http://ccdev15.dreamhosters.com/api/query?';
 
 ?>
