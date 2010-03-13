@@ -185,7 +185,8 @@ function populate_tags() {
         ord: 'asc',
         pair: 'remix',
         dataview: 'tags',
-        cat: 'genre'
+        cat: 'genre',
+        cache: 'genre_tags'
     };
     new ccmQuery(options, parameters, tagGenreQueryResults).query();
     
@@ -196,7 +197,8 @@ function populate_tags() {
         pair: 'remix',
         dataview: 'tags',
         min: 3,
-        cat: 'instr'
+        cat: 'instr',
+        cache: 'instr_tags'
     };
     new ccmQuery(options, parameters, tagInstrumentQueryResults).query();
 
@@ -207,7 +209,8 @@ function populate_tags() {
         dataview: 'tags',
         pair: 'remix',
         min: 10,
-        cat: 'mood'   // 'Style' actually
+        cat: 'mood',   // 'Style' actually
+        cache: 'mood_tags'
     };
     new ccmQuery(options, parameters, tagStyleQueryResults).query();
     
