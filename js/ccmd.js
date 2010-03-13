@@ -68,6 +68,7 @@ var str_download_size = 'Download size';
 var str_playtime = 'Playing time';
 var str_podcast_detail = 'podcast details';
 var str_at_ccmixter = '@ccMixter';
+var str_did_u_mean = 'Did you mean';
 
 /*
     ADVANCED UTILITY
@@ -749,18 +750,20 @@ function query_results(results) {
 
 function didUMean_results(results) {
     if(results.length > 0) {
-        var html = '<strong>Did you mean: </strong>';
+        var html = '<strong>'+str_did_u_mean+': </strong>';
+
         for(var i = 0; i < results.length; i++) {
             var result = results[i];
-            var final_alias = result.tag_alias_alias.replace(",",", ");
+            var final_alias = result.tag_alias_alias.replace(/,/g,", ");
             html += '<a class="aliassearch" href="#">' + final_alias + '</a>';
             if(i < (results.length-1)) {
                 html += ', ';
             }
         }
         $('#didumean').html(html);
+
         $('.aliassearch').click(function(e) {
-            var alias = $(this).html();
+            var alias = $(this).html().replace(/(\s+)?,(\s+)?/g,' ');
             
             $('#dig-query').val(alias);
             do_search();
