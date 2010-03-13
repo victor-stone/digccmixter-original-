@@ -38,8 +38,10 @@ var str_you_already = 'You already have permission&hellip;';
 var str_more = 'more &raquo;';
 var str_by = 'by';
 var str_download = 'Download';
-var str_IE_right = 'IE: Right-click select &lsquo;Save Target As&rsquo;';
-var str_mac_control = 'Mac: Control-click select &lsquo;Save Link As&rsquo;';
+var str_to_download = 'To download'
+var str_IE_right = 'Right-click on title and select &lsquo;Save Target As&rsquo;';
+var str_mac_control = 'Control-click on title and select &lsquo;Download Linked File As&rsquo;';
+var str_moz_control = 'Control-click on title and select &lsquo;Save Link As&rsquo;';
 var str_info = 'Info';
 var str_featuring = 'Featuring';
 var str_BPM = 'BPM';
@@ -61,6 +63,11 @@ var str_other_files = 'Other project files:'
 var str_sample_history = 'Sample History';
 var str_artist_profile = 'Artist Profile';
 var str_i_used_this = 'I Used This Track... (trackback)';
+var str_subscribe = 'Subscribe to all by dragging <a href="http://feeds2.feedburner.com/ccMixter_music">this link</a> to your music player.'
+var str_download_size = 'Download size';
+var str_playtime = 'Playing time';
+var str_podcast_detail = 'podcast details';
+var str_at_ccmixter = '@ccMixter';
 
 /*
     ADVANCED UTILITY
@@ -298,16 +305,29 @@ function build_result(result, num, max_name_length, featured) {
 }
 
 function build_podcast_result(result, num, max_name_length) {
-    var html = '<div class="avatar-container"><img src="images/avatar.gif" class="avatar-image round" alt="'+
-                result.user_real_name+'" style="background-image: url('+result.user_avatar_url+');"></div>';
-    html += '<div class="podcast-data-container">';
-    html += '<h4>'+safe_upload_name(result.topic_name, max_name_length)+'</h4>';
-    html += 'by <span class="result-creator">'+result.user_real_name+'</span>';
-    html += '<div class="podcast-meta"><a href="'+result.enclosure_url+
-            '" class="podcast-download-link" id="podcast-download-'+num+
-            '"><span>Download</span></a> ('+ Math.floor(result.enclosure_size / (1024*1024)) +'MB) '+
-            result.enclosure_duration+'</div>';
-    html += '</div>';
+    var html
+    
+        = '<div class="avatar-container">'
+        +       '<img src="images/avatar.gif" class="avatar-image round" alt="' + result.user_real_name+'" '
+        +          'style="background-image: url('+result.user_avatar_url+');">'
+        +  '</div>'
+        +  '<div class="podcast-data-container">'
+        +  '    <h4>'
+        +        '<a href="'+result.enclosure_url + '" class="podcast-download-link" '
+        +           'id="podcast-download-' + num + '">'
+        +           safe_upload_name(result.topic_name, max_name_length)
+        +       '</a>'
+        +   '</h4>'
+        +      str_by + ' <span class="result-creator">'+result.user_real_name+'</span> '
+        +         '<span>' + str_at_ccmixter + ': </span><a href="' + result.topic_url + '">' + str_podcast_detail + '</a>'
+        +     '<div class="podcast-meta">'
+        +           '<span>'+str_download_size+': </span>'
+        +              Math.floor(result.enclosure_size / (1024*1024)) +'MB '
+        +           '<br /><span>'+str_playtime+': </span>'
+        +              result.enclosure_duration
+        +     '</div>'
+        +  '</div>'
+
     return html;
 }
 
@@ -353,10 +373,29 @@ function result_slidebox(result, num) {
     return html;
 }
 
+function get_dl_instruction()
+{
+    var map = {
+        webkit: str_mac_control,
+        mozilla: str_moz_control,
+        msie: str_IE_right
+    };
+    
+
+    var result = null;
+    $.each( $.browser, function( agent, vers ) {
+        if( map[agent] )
+            result = map[agent];
+    });
+        
+    return result || map.msie; 
+}
+
 function result_download(result, num) {
     var html = '<div class="item">';
+    var dl_instruct = get_dl_instruction();
     html += '<h5>'+str_download+' <em>'+result['upload_name']+'</em></h5>';
-    html += '<p class="note">'+str_IE_right+'<br />'+str_mac_control+'</p>';
+    html += '<p class="note">'+ str_to_download + ': ' + dl_instruct+'</p>';
     
     html += '<div class="download-list-container"><ol class="download-list">';
     // loop through files
@@ -430,7 +469,7 @@ function result_info(result, num) {
     var history_url = CCM_QUERY_URL + 't=upload_histogram&ids=' + result.upload_id;
     
 	html += '<ul class="meta">'
-          + '<li>@ccMixter:</li>'
+          + '<li>'+str_at_ccmixter+'</li>'
 	html += '<li><a href="' + result.artist_page_url + '" class="button-link">' + str_artist_profile + '</a></li>';
 	html += '<li><a href="' + history_url + '" class="button-link">' + str_sample_history + '</a></li>';
 	html += '<li><a href="' + tb_url + '" class="button-link">' + str_i_used_this + '</a></li>';
@@ -762,9 +801,10 @@ function popchartQueryResults(results) {
 }
 
 function podcastQueryResults(results) {
+    var dl_instruct = get_dl_instruction();
     var html ='';
     html += '<h3>'+str_podcasts+'</h3>';
-    html += '<p>Subscribe to all by dragging <a href="http://feeds2.feedburner.com/ccMixter_music">this link</a> to your music player</p>';
+    html += '<p>'+str_subscribe+' '+str_to_download + ': ' + dl_instruct + '</p>';
     var result_count = jQuery('.result').length;
     var j = (result_count == 0) ? 0 : result_count+1;
     html += '<div class="block wider first">';
@@ -791,8 +831,9 @@ function podcastQueryResults(results) {
 }
 
 function podcastPageQueryResults(results) {
+    var dl_instruct = get_dl_instruction();
     var html ='';
-    html += '<p>Subscribe to all by dragging <a href="http://feeds2.feedburner.com/ccMixter_music">this link</a> to your music player</p>';
+    html += '<p>'+str_subscribe+' '+str_to_download + ': ' + dl_instruct + '</p>';
     for(var i = 0; i < results.length; i++) {
         var result = results[i];
         if((i%2) != 0) {
@@ -1152,7 +1193,8 @@ function populate_dig()
     
     $('#dig-type').change( function() {
         var val = $(this).val();
-        page_opts['post_back_url'] = page_opts['post_back_url'].replace(page_opts['doc_url'],val);
+        var regx = new RegExp( '\/' + page_opts['doc_url'] + '$');
+        page_opts['post_back_url'] = page_opts['post_back_url'].replace(regx, '/' + val);
         page_opts['doc_url'] = val;
     })
 

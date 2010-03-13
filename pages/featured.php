@@ -71,6 +71,16 @@ $queries['podcasts']->_page_opts['results_func'] = 'podcastQueryResults';
 // ------ OUPUT PAGE ----------
 
 $script_heads[] = queries_to_jscript( $queries );
+
+$page_opts = '{}';
+
+$script_heads[] =<<<EOF
+    <script type="text/javascript">
+        page_opts = {$page_opts};
+    </script>
+EOF;
+
+
 $page_title = 'dig.ccmixter Featured Music';
 $featured_class = 'class="current"';
             

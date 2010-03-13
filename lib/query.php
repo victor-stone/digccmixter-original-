@@ -344,7 +344,7 @@ class digQuery
             {
                 // if reqtags already has these tags then don't add them again
                 
-                if( preg_match_all( '/-(female_vocals|male_vocals|vocals)/',$this->_query_args['reqtags']) != 3 )
+                if( preg_match_all( '/-(female_vocals|male_vocals|vocals)/',$this->_query_args['reqtags'],$m) !== 3 )
                 {
                     $this->_query_args['reqtags'] = ',' . $nottags;
                 }
@@ -468,11 +468,11 @@ function queries_to_no_script($queries)
                 if( ($offset = $qi->offset - $qi->limit) < 0 )
                     $offset = 0;
                     
-                print "<p><a href='{$base}offset={$offset}'>prev</a></p>\n";
+                print "<p><a href='{$base}{$offset}'>prev</a></p>\n";
             }
             if( ($offset = $qi->offset + $qi->limit) < $qi->total )
             {
-                print "<p><a href='{$base}offset={$offset}'>next</a></p>\n";
+                print "<p><a href='{$base}{$offset}'>next</a></p>\n";
             }
         }
         
