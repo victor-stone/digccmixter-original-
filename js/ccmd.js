@@ -545,7 +545,7 @@ function result_attribution(result, num) {
             + 'artist\'s name and the title of the track with links and urls. For example:'
             + '</p>'
             + '<p class="attribution-example"> '
-            +     '"' + result['upload_name'] + '" by ' + result['user_real_name'] + '<br />'
+            +     '"' + result['upload_name'] + '" '+str_by+' ' + result['user_real_name'] + '<br />'
             +     result['file_page_url'] + '<br />'
             +     ' is licensed under a Creative Commons license:<br />'
             +     result['license_url']
