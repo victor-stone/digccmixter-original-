@@ -33,7 +33,31 @@
 			<div class="block wider">
 				<p><strong>dig.ccmixter</strong> is devoted to helping you find that great music, all of which is liberally licensed under a <a href="http://creativecommons.org">Creative Commons</a> license so you <em>already have permission</em> to use this music in your video, podcast, school project, personal music player, or where ever&hellip; We even have several 1,000 tracks that <em>already have permission</em> to use in <strong>commercial projects</strong> for free.</p>
 			</div>
-		</div>		
+		</div>
+        
+		<div class="page full home-heading">
+            <a name="help"><h3>Support</h3></a>
+        </div>
+        <div class="page full help">
+            <div class="block wider first">
+                <p>Watch this how-to video to get the most of dig.ccMixter.</p>
+                <embed src="http://blip.tv/play/AYHNkm0C" type="application/x-shockwave-flash" width="480" height="300" allowscriptaccess="always" allowfullscreen="true"></embed>
+            </div>
+        </div>
+        
+		<div class="page full home-heading">
+            <a name="credits"><h3>Credits</h3></a>
+        </div>
+        <div class="page full credits">
+            <div class="block wider first">
+                <ul>
+                    <li>Logo and site design by <a href="http://nvzion.com">nvzion</a></li>
+                    <li>Concept, coding and nusance <a href="http://fourstones.net">Victor Stone</a></li>
+                    <li>All music provided by the <a href="http://ccmixter.org">ccMixter</a> community of singer, musicians and producers.</li>
+                    <li>Produced by <a href="http://artistechmedia.com">ArtIsTech Media</a>.</li>
+                </ul>
+            </div>
+        </div>
 		<div class="page full badge-container about-badge-container round">
 			<div class="block first">
 				<a href="http://ccmixter.org"><img src="images/ccmixter-h.jpg" alt="Visit ccmixter"></a>
