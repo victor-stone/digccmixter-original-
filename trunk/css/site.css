@@ -615,9 +615,11 @@ ul.checklist label {
 .result-creator {
 	font-size: .75em;
 }
-#featured .result-creator {
+.podcast-data-container {
+	margin-left: 81px;
+}
+#featured .result-creator, .podcast-data-container .result-creator {
 	font-size: 1em;
-	padding-left: 60px;
 }
 #podcasts .result-creator {
 	color: #3399CC;

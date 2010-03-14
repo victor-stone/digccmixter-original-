@@ -322,13 +322,13 @@ function build_podcast_result(result, num, max_name_length) {
         +           safe_upload_name(result.topic_name, max_name_length)
         +       '</a>'
         +   '</h4>'
-        +      str_by + ' <span class="result-creator">'+result.user_real_name+'</span> '
-        +         '<span>' + str_at_ccmixter + ': </span><a href="' + result.topic_url + '">' + str_podcast_detail + '</a>'
+        +      str_by + ' <span class="result-creator">'+result.user_real_name+'</span>'
         +     '<div class="podcast-meta">'
-        +           '<span>'+str_download_size+': </span>'
-        +              Math.floor(result.enclosure_size / (1024*1024)) +'MB '
-        +           '<br /><span>'+str_playtime+': </span>'
-        +              result.enclosure_duration
+        +           '<span><strong>'+str_download_size+':</strong></span>&nbsp;'
+        +              Math.floor(result.enclosure_size / (1024*1024)) +'MB'
+        +           '&nbsp;/&nbsp;<span><strong>'+str_playtime+':</strong>&nbsp;</span>'
+        +              result.enclosure_duration + '<br />'
+		+			'<span><strong>' + str_at_ccmixter + ':</strong>&nbsp;</span><a href="' + result.topic_url + '">' + str_podcast_detail + '</a>'
         +     '</div>'
         +  '</div>'
 
