@@ -33,42 +33,42 @@ var YMPParams = {
 };
 
 
-var str_remove_tag = 'remove tag';
-var str_you_already = 'You already have permission&hellip;';
-var str_more = 'more &raquo;';
-var str_by = 'by';
-var str_download = 'Download';
-var str_to_download = 'To download'
-var str_IE_right = 'Right-click on title and select &lsquo;Save Target As&rsquo;';
-var str_mac_control = 'Control-click on title and select &lsquo;Download Linked File As&rsquo;';
-var str_moz_control = 'Control-click on title and select &lsquo;Save Link As&rsquo;';
-var str_info = 'Info';
-var str_featuring = 'Featuring';
 var str_BPM = 'BPM';
-var str_uploaded = 'Uploaded';
-var str_you_already_have = 'You already have permission to use &ldquo;';
-var str_more = 'More';
-var str_permission = 'Permission';
+var str_IE_right = 'Right-click on title and select &lsquo;Save Target As&rsquo;';
 var str_artist_contact_info = 'Artist contact info';
-var str_suggestions_on = 'Suggestions on how to give credit?';
-var str_click_here = 'Click here';
+var str_artist_profile = 'Artist Profile';
+var str_at_ccmixter = '@ccMixter';
 var str_attribution = 'Attribution';
 var str_back = 'Back';
+var str_by = 'by';
+var str_click_here = 'Click here';
+var str_did_u_mean = 'Did you mean';
+var str_download = 'Download';
+var str_download_size = 'Download size';
 var str_editors_picks = 'Editors\' Picks';
-var str_podcasts = 'Podcasts';
 var str_even_money   = 'even if you make money with your project';
 var str_except_money = '(except where money is involved)';
-var str_license_your = 'license your project in the same way as %upload_name% and';
-var str_other_files = 'Other project files:'
-var str_sample_history = 'Sample History';
-var str_artist_profile = 'Artist Profile';
+var str_feat = 'feat.'
+var str_featuring = 'Featuring';
 var str_i_used_this = 'I Used This Track... (trackback)';
-var str_subscribe = 'Subscribe to all by dragging <a href="http://feeds2.feedburner.com/ccMixter_music">this link</a> to your music player.'
-var str_download_size = 'Download size';
+var str_info = 'Info';
+var str_license_your = 'license your project in the same way as %upload_name% and';
+var str_mac_control = 'Control-click on title and select &lsquo;Download Linked File As&rsquo;';
+var str_more = 'More';
+var str_moz_control = 'Control-click on title and select &lsquo;Save Link As&rsquo;';
+var str_other_files = 'Other project files:'
+var str_permission = 'Permission';
 var str_playtime = 'Playing time';
 var str_podcast_detail = 'podcast details';
-var str_at_ccmixter = '@ccMixter';
-var str_did_u_mean = 'Did you mean';
+var str_podcasts = 'Podcasts';
+var str_remove_tag = 'remove tag';
+var str_sample_history = 'Sample History';
+var str_subscribe = 'Subscribe to all by dragging <a href="http://feeds2.feedburner.com/ccMixter_music">this link</a> to your music player.'
+var str_suggestions_on = 'Suggestions on how to give credit?';
+var str_to_download = 'To download'
+var str_uploaded = 'Uploaded';
+var str_you_already = 'You already have permission&hellip;';
+var str_you_already_have = 'You already have permission to use &ldquo;';
 
 /*
     ADVANCED UTILITY
@@ -303,7 +303,7 @@ function build_result(result, num, max_name_length, featured) {
     html += result_heading(result, num, max_name_length, featured);
     html += '<div class="clearer"></div>';
     html += '<div class="license-details" id="license-details-'+num+'">'+
-                 str_you_already +' <a href="#" class="license-more" id="licmo_'+num+'">'+str_more+'</a></div>';
+                 str_you_already +' <a href="#" class="license-more" id="licmo_'+num+'">'+str_more+ '&hellip;</a></div>';
     html += result_slidebox(result, num);
     return html;
 }
@@ -450,11 +450,11 @@ function result_info(result, num) {
              +     '<h6>'+str_by+' <a href="'+result['artist_page_url']+'">'+result['user_real_name']+'</a></h6>'
              +     '<ul class="meta">';
                   
-    if(result['upload_extra/featuring'] && (result['upload_extra/featuring'] != '')) {        
-        html += '<li><strong>'+str_featuring+':</strong> '+result['upload_extra/featuring']+'</li>';
+    if(result.upload_extra.featuring ) {        
+        html += '<li><strong>'+str_featuring+':</strong> '+result.upload_extra.featuring+'</li>';
     }
-    if(result['upload_extra/bpm'] && (result['upload_extra/bpm'] != '')) {
-        html += '<li><strong>'+str_BPM+':</strong> '+result['upload_extra/bpm']+'</li>';
+    if(result.upload_extra.bpm ) {
+        html += '<li><strong>'+str_BPM+':</strong> '+result.upload_extra.bpm +'</li>';
     }
     html += '<li><strong>'+str_uploaded+':</strong> '+result['upload_date_format']+'</li>';
     if(result['upload_extra/nsfw'] == 'true') {
@@ -549,7 +549,14 @@ function result_attribution(result, num) {
             + 'artist\'s name and the title of the track with links and urls. For example:'
             + '</p>'
             + '<p class="attribution-example"> '
-            +     '"' + result['upload_name'] + '" '+str_by+' ' + result['user_real_name'] + '<br />'
+            +     '"' + result['upload_name'] + '" '+str_by+' ' + result['user_real_name'];
+
+    if( result.upload_extra.featuring )
+    {
+        html += ' (' + str_feat + ' ' + result.upload_extra.featuring + ')';
+    }
+
+    html += '<br />'
             +     result['file_page_url'] + '<br />'
             +     ' is licensed under a Creative Commons license:<br />'
             +     result['license_url']
@@ -993,7 +1000,7 @@ function _hookupEvents()
     license.find('a').hover(
         function() {
             var id_num = parseInt(this.id.match(/[0-9]+$/)[0]);
-            if( page_opts.lic_open && (page_opts.lic_open == id_num ) )
+            if( page_opts.lic_open && (page_opts.lic_open == (id_num+1) ) )
                 return;
             if( page_opts.timer )
             {
