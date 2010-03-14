@@ -43,7 +43,7 @@
 					<li><a href="http://ccmixterblog.blogspot.com">ccMixter Blog</a></li>
 					<li><a href="http://tunetrack.net/artistech/blog/">ArtIsTech Media Blog</a></li>
 					<li><a href="http://twitter.com/ccmixtermusic">Twitter</a></li>
-					<li><a href="http://ccmixter.org/view/extras/news">Friends of ccMixter</a></li>
+					<li><a href="http://ccmixter.org/view/media/extras/news">Friends of ccMixter</a></li>
 				</ul>
 			</div>
 			<div class="footer-column">
