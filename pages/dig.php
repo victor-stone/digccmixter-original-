@@ -91,7 +91,7 @@ require_once('lib/head.php');
 					<div class="search-select-container">
 						<select name="dig-lic" id="dig-lic" size="1">
 							<option value="">All licenses</option>
-					        <option value="open">Free for commercial use</option>
+					        <option value="safe">Free for commercial use</option>
 						</select>
                         <?
                             /*
