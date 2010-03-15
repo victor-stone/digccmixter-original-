@@ -47,7 +47,7 @@ var str_download = 'Download';
 var str_download_size = 'Download size';
 var str_editors_picks = 'Editors\' Picks';
 var str_even_money   = 'even if you make money with your project';
-var str_except_money = '(except where money is involved)';
+var str_except_money = '(<span style="font-style:italic">except</span> where money is involved)';
 var str_feat = 'feat.'
 var str_featuring = 'Featuring';
 var str_i_used_this = 'I Used This Track... (trackback)';
@@ -56,6 +56,7 @@ var str_license_your = 'license your project in the same way as %upload_name% an
 var str_mac_control = 'Control-click on title and select &lsquo;Download Linked File As&rsquo;';
 var str_more = 'More';
 var str_moz_control = 'Control-click on title and select &lsquo;Save Link As&rsquo;';
+var str_no_ad = '<strong>do not use the music to advertise or promote anything</strong> but the music or a remix and';
 var str_other_files = 'Other project files:'
 var str_permission = 'Permission';
 var str_playtime = 'Playing time';
@@ -416,7 +417,7 @@ function result_download(result, num) {
             
             if( file_count > 1 )
             {
-                html += '<p class="other_project_files">' + str_other_files + '</p>';
+                html += '<p class="other_project_files note">' + str_other_files + '</p>';
             }
             
             html += '</li>'
@@ -506,22 +507,26 @@ function result_info(result, num) {
 function result_permission(result, num) {
     var html = '<div class="item">'
              +   '<h5>'+str_permission+'</h5>'
-             +      '<p>You want to use &ldquo;'+result['upload_name']+ '&rdquo; by '
-             +          '<a href="'+result['artist_page_url']+'/profile"><strong>'+result['user_real_name']+'</strong></a>'
-             +         ' in a project, like a video, podcast, school project, album? You already have permission to copy, '
-             +         'distribute, remix and embed it into your project '+ commercial_clause(result['license_tag'])
-             +         ' as long as you '+share_alike_clause(result['license_tag'])
+             +      '<p>You want to use &ldquo;'+ result.upload_name + '&rdquo; by '
+             +         '<strong>'+ result.user_real_name + '</strong>'
+             +         ' in a project, like a video, podcast, school project, album?'
+             +       '</p>'
+             +       '<p>You already have permission to copy, '
+             +         'distribute, remix and embed it into your project '+ commercial_clause(result.license_tag)
+             +         ' as long as you '+ share_alike_clause(result.license_tag, result.upload_name)
              +         ' give proper credit to '
-             +         '<a href="'+result['artist_page_url']+'/profile"><strong>'+result['user_real_name']+'</strong></a>. '
+             +         '<a href="#" class="next-link"><strong>'+result['user_real_name']+'</strong></a>. '
+             +        '</p>'
+             +        '<p>'
              +         'Please read the ' 
-             +         '<a href="'+result['license_url']+'">Creative Commons '+result['license_name']+' license</a>'
+             +         '<a href="'+ result.license_url +'">Creative Commons '+ result.license_name +' license</a>'
              +         ' for more details and context.</p><p>If you&rsquo;d like to do something with &ldquo;'
-             +         result['upload_name']+'&rdquo; that isn&rsquo;t part of the permissions you already have, '
+             +         result.upload_name +'&rdquo; that isn&rsquo;t part of the permissions you already have, '
              +         'you need to get permission directly from '
-             +         '<a href="'+result['artist_page_url']+'/profile"><strong>'+ result['user_real_name']+'</strong></a>.'
+             +         '<strong>'+ result.user_real_name +'</strong>.'
              +      '</p>'
              +      '<p>'
-             +          '<a href="'+result['artist_page_url']+'/profile">'+str_artist_contact_info+'</a>'
+             +          '<a href="'+result.artist_page_url +'/profile">'+str_artist_contact_info+'</a>'
              +      '</p>'
              +      '<div class="modal-nav-container">'
              +          '<div class="prev-link-container">'
@@ -594,8 +599,8 @@ var lic_meta = {
     'share_alike':                { img: 'images/by-sa.png',             com: str_even_money,    cc: 'by-sa/3.0/88x31.png',        sa: str_license_your   },
     'non_commercial_share_alike': { img: 'images/by-nc-sa.png',          com: str_except_money,  cc: 'by-nc-sa/3.0/88x31.png',     sa: str_license_your   },
     'non_commercial':             { img: 'images/by-nc.png',             com: str_except_money,  cc: 'by-nc/3.0/88x31.png',        sa: null   },
-    'sampling_plus':              { img: 'images/sampling-plus.png',     com: str_even_money,    cc: 'sampling+/1.0/88x31.png',    sa: null   },
-    'nc_sampling_plus':           { img: 'images/nc-sampling-plus.png',  com: str_except_money,  cc: 'nc-sampling+/1.0/88x31.png', sa: null   },
+    'sampling_plus':              { img: 'images/sampling-plus.png',     com: str_even_money,    cc: 'sampling+/1.0/88x31.png',    sa: str_no_ad   },
+    'nc_sampling_plus':           { img: 'images/nc-sampling-plus.png',  com: str_except_money,  cc: 'nc-sampling+/1.0/88x31.png', sa: null  },
     'cczero':                     { img: 'images/cc0.png',               com: str_even_money,    cc: 'zero/1.0/88x31.png',         sa: null   }
 };
 
@@ -608,8 +613,8 @@ function commercial_clause(license_tag) {
 }
 
 function share_alike_clause(license_tag, upload_name) {
-    var str = lic_meta[license_tag].sh;
-    return str ? str.replace('%upload_name%','<strong>'+upload_name+'</strong>') : '';
+    var str = lic_meta[license_tag].sa;
+    return str ? str.replace('%upload_name%','&ldquo;'+upload_name+'&rdquo;') : '';
 }
 
 function license_image(license_tag) {
@@ -1091,9 +1096,9 @@ function do_search() {
     var q = '?';
     var url = page_opts['post_back_url'];
     
-    if( search_lic == 'open' )
+    if( search_lic == 'safe' )
     {
-        url += q + 'dig-lic=open';
+        url += q + 'dig-lic=safe';
         q = '&';
     }
     
