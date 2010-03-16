@@ -39,9 +39,9 @@
             <a name="help"><h3>Support</h3></a>
         </div>
         <div class="page full help">
-            <div class="block wider first">
+            <div class="block wider ">
                 <p>Watch this how-to video to get the most of dig.ccMixter.</p>
-                <embed src="http://blip.tv/play/AYHNkm0C" type="application/x-shockwave-flash" width="480" height="300" allowscriptaccess="always" allowfullscreen="true"></embed>
+                <embed src="http://blip.tv/play/AYHN0VkC" type="application/x-shockwave-flash" width="480" height="300" allowscriptaccess="always" allowfullscreen="true"></embed>
             </div>
         </div>
         
