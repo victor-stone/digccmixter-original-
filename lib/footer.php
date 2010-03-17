@@ -25,7 +25,9 @@
 					<li><a href="/podcast_music">&hellip;podcasts</a></li>
 					<li><a href="/music_for_film_and_video">&hellip;videos</a></li>
 					<li><a href="/music_for_games">&hellip;games</a></li>
-					<li><a href="/music_for_entertainment">&hellip;entertainment</a></li>
+					<li><a href="/coffeeshop_music">&hellip;coffee shop</a></li>
+					<li><a href="/party_music">&hellip;party</a></li>
+					<li><a href="/cubicle_music">&hellip;cubicle</a></li>
 				</ul>
 			</div>
 			<div class="footer-column">
