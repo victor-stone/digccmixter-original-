@@ -37,8 +37,8 @@ if( !isset($page_title) )
     <title><?= $page_title ?></title>
     <meta http-equiv="Content-type" content="text/html; charset=utf-8">
     <meta name="MSSmartTagsPreventParsing" content="true" />
-    <meta name="description" content="Description goes here." />
-    <meta name="keywords" content="keywords, go, here" />
+    <meta name="description" content="Find the perfect music, liberally licensed, for your project or listening" />
+    <meta name="keywords" content="music creative commons podsafe soundtrack freemusic ccmixter free video games" />
     <link rel="stylesheet" href="css/site.css" type="text/css" media="screen, projection" />
     <link rel="stylesheet" href="css/print.css" type="text/css" media="print" />
     <!--[if IE]><link rel="stylesheet" href="css/ie.css" type="text/css" media="screen, projection" /><![endif]-->
