@@ -71,3 +71,12 @@
 			<div class="clearer"></div>
 			<p class="center site-license"><a href="http://creativecommons.org/licenses/by-nc/3.0/us/"><img src="images/by-nc.png" alt="Creative Commons Attribution-Noncommercial 3.0 United States License"></a> This text and images on this site are licensed under a <a href="http://creativecommons.org/licenses/by-nc/3.0/us/">Creative Commons Attribution-Noncommercial 3.0 United States License</a> by <a href="http://artistechmedia.com">ArtIsTech Media</a>.</p>
 		</div>
+<script type="text/javascript">
+var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+</script>
+<script type="text/javascript">
+try {
+var pageTracker = _gat._getTracker("UA-2878955-3");
+pageTracker._trackPageview();
+} catch(err) {}</script>
