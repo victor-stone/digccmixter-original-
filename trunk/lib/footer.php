@@ -18,6 +18,7 @@
 *
 */
 ?>
+<div class="clearer"></div>
 <div id="footer">
 			<div class="footer-column first-footer-column">
 				<h4>Find music for&hellip;</h4>
