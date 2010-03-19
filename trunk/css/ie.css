@@ -7,3 +7,17 @@ sup {vertical-align:text-top;}
 sub {vertical-align:text-bottom;}
 html>body p code {*white-space:normal;}
 hr {margin:-8px auto 11px;}
+
+
+.dig-entry {
+	margin: 0;
+}
+.dig-entry #q, #dig-query {
+	padding: 8px 6px 0px 6px;
+}
+.prev-link-container {
+	width: 14%;
+}
+.next-link-container {
+	width: 84%;
+}
