@@ -945,6 +945,7 @@ textarea.attribution-snippet {
 }
 .slidebox .item {
 	overflow: hidden;
+	text-align: left;
 }
 
 /** ------------------------------
