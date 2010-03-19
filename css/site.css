@@ -195,12 +195,9 @@ h3.subheading {
 	border-bottom: 1px solid #CCC;
 	padding-bottom: 0;
 }
-.home-description, .home-about {
+.home-description, .home-about, .help {
 	padding-bottom: 0;
 	background: transparent url('../images/column-bg.jpg') left top repeat-x;
-}
-.home-about {
-	border-bottom: 1px solid #CCC;
 }
 .dig-entry {
 	text-align: center;
@@ -271,7 +268,24 @@ h3.subheading {
 	width: 192px;
 	padding: 10px;
 }
-
+.home-about {
+	border-bottom: 1px solid #CCC;
+}
+.help {
+	text-align: center;
+}
+.help .video-container {
+	margin: 0 auto;
+	width: 500px;
+	background-color: #FFF;
+	padding: 10px;
+}
+.credits ul {
+	margin: 0;
+}
+.credits li {
+	list-style: none;
+}
 
 /** ------------------------------
     FOOTER
@@ -699,7 +713,6 @@ a.ymp-btn-page-play em.ymp-skin, a.ymp-btn-page-pause em.ymp-skin {
 	margin-left: 60px;
 }
 .info-header {
-	height: 93px;
 	padding-left: 105px;
 	background: transparent url(../images/avatar.png) top left no-repeat;
 	margin-bottom: 1em;

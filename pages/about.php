@@ -39,9 +39,11 @@
             <a name="help"><h3>Support</h3></a>
         </div>
         <div class="page full help">
-            <div class="block wider ">
+            <div class="video-container round">
                 <p>Watch this how-to video to get the most of dig.ccMixter.</p>
-                <embed src="http://blip.tv/play/AYHN0VkC" type="application/x-shockwave-flash" width="480" height="300" allowscriptaccess="always" allowfullscreen="true"></embed>
+				<div class="video">
+	                <embed src="http://blip.tv/play/AYHN0VkC" type="application/x-shockwave-flash" width="480" height="300" allowscriptaccess="always" allowfullscreen="true"></embed>
+				</div>
             </div>
         </div>
         
@@ -49,14 +51,12 @@
             <a name="credits"><h3>Credits</h3></a>
         </div>
         <div class="page full credits">
-            <div class="block wider first">
-                <ul>
-                    <li>Logo and site design by <a href="http://nvzion.com">nvzion</a></li>
-                    <li>Concept, coding and nusance <a href="http://fourstones.net">Victor Stone</a></li>
-                    <li>All music provided by the <a href="http://ccmixter.org">ccMixter</a> community of singer, musicians and producers.</li>
-                    <li>Produced by <a href="http://artistechmedia.com">ArtIsTech Media</a>.</li>
-                </ul>
-            </div>
+			<ul>
+                <li>Logo and site design by <a href="http://nvzion.com">nvzion</a></li>
+                <li>Concept, coding and nusance <a href="http://fourstones.net">Victor Stone</a></li>
+                <li>All music provided by the <a href="http://ccmixter.org">ccMixter</a> community of singer, musicians and producers.</li>
+                <li>Produced by <a href="http://artistechmedia.com">ArtIsTech Media</a>.</li>
+            </ul>
         </div>
 		<div class="page full badge-container about-badge-container round">
 			<div class="block first">
