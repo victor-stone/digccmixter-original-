@@ -52,6 +52,34 @@ function prep_dig_query_args($digQuery)
             $args[$V] = $F[$K];
     }
     
+    
+    // first, map 'instrumental' search to tags because
+    // otherwise, every time someone even mentions
+    // 'instrumental' in their description it would
+    // get a hit.
+
+    if( !empty($args['search']) )
+    {
+        $tstr = trim($args['search']);
+        if( $tstr == 'instrumental' )
+        {
+            $args['search'] = '';
+            if( empty($args['title']))
+            {
+                $args['title'] = 'Music Marked: Instrumental';
+            }
+            
+            if( empty($args['tagexp']) )
+            {
+                $args['tagexp'] = 'instrumental';
+            }
+            else
+            {
+                $args['tagexp'] .= '*instrumental';
+            }
+        }
+    }
+    
     return $args;   
 }
 
