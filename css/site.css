@@ -875,6 +875,10 @@ p.other_project_files {
 	background-image: url(../images/ymp-ui.png) !important;
 	background-repeat: no-repeat;
 }
+#ymp-tray ul li a.playing {
+	background-color: #3399CC !important;
+	color: #FFF;
+}
 
 
 /** ------------------------------
