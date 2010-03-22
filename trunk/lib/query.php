@@ -440,7 +440,7 @@ function queries_to_no_script($queries)
         
         print '<noscript>';
 
-        print '<ul>';
+        print '<ul xmlns:cc="http://creativecommons.org/ns#" xmlns:dc="http://purl.org/dc/elements/1.1/">';
             $recs = & $qi->results;
             $keys = array_keys($recs);
             foreach( $keys as $K )
@@ -449,9 +449,21 @@ function queries_to_no_script($queries)
                 if( !empty($R['file_page_url']) )
                 {
                     $tags = str_replace(',',', ',$R['upload_tags']);
-                    print "<li><a href='{$R['file_page_url']}'>" .
-                          "{$R['upload_name']}</a> by " .
-                          "<a href='{$R['artist_page_url']}'>{$R['user_real_name']}</a> {$tags}</li>\n";
+                    /*
+// '<a rel="license" href="%license_url%">
+//                 + '%upload_name%</span> by
+//       <a xmlns:cc="http://creativecommons.org/ns#" href="%file_page_url%"
+                
+                rel="cc:attributionURL">%user_real_name%</a> is licensed under a
+                <a rel="license" href="%license_url%">%license_name%</a>.';
+
+                    */
+                    print "<li><a property=\"cc:attributionName\" href='{$R['file_page_url']}'>" .
+                          '<span href="http://purl.org/dc/dcmitype/Sound" property="dc:title" rel="dc:type">' .
+                          $R['upload_name'] . "</span></a> by " .
+                          "<a rel=\"cc:attributionURL\" href='{$R['artist_page_url']}'>{$R['user_real_name']}</a> ".
+                          "Under <a rel=\"license\" href=\"{$R['license_url']}\">{$R['license_name']}</a>" .
+                          $tags . "</li>\n";
                 }
                 elseif( !empty($R['enclosure_url']) )
                 {
