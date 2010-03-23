@@ -848,7 +848,7 @@ a.ymp-btn-page-play em.ymp-skin, a.ymp-btn-page-pause em.ymp-skin {
 
 .download-list-container {
 	overflow: auto;
-	height: 240px;
+	height: 200px;
 }
 ol.download-list {
 	margin-left: 2em;
@@ -865,6 +865,9 @@ p.other_project_files {
 }
 #edpicks, #popchart, #podcasts {
 	margin-bottom: 2em;
+}
+#edpicks .result-creator, #popchart .result-creator {
+	margin-left: 60px;
 }
 
 

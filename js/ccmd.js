@@ -70,6 +70,7 @@ var str_to_download = 'To download'
 var str_uploaded = 'Uploaded';
 var str_you_already = 'You already have permission&hellip;';
 var str_you_already_have = 'You already have permission to use &ldquo;';
+var str_let_us_know = 'let us know!';
 
 /*
     ADVANCED UTILITY
@@ -399,7 +400,17 @@ function get_dl_instruction()
 function result_download(result, num) {
     var html = '<div class="item">';
     var dl_instruct = get_dl_instruction();
-    html += '<h5>'+str_download+' <em>'+result['upload_name']+'</em></h5>';
+	html += '<h5>'+str_download+' <em>'+result.upload_name+'</em></h5>';
+
+    var tb_url = CCM_QUERY_URL
+               + 't=trackback_page&ids=' + result.upload_id
+               + '&title=Submit a Trackback'
+               + '&returl=' + encodeURIComponent(document.location)
+               + '&rett=dig.ccMixter';
+
+	html += '<p><strong>If you use this track in a project, make sure to come back here '
+		  + 'and <a href="' + tb_url + '">' + str_let_us_know + '</a></strong></p>';	
+ 
     html += '<p class="note">'+ str_to_download + ': ' + dl_instruct+'</p>';
     
     html += '<div class="download-list-container"><ol class="download-list">';
