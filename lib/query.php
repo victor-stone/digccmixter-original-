@@ -185,7 +185,14 @@ class digQuery
         {
             if( preg_match('/^dig-/i',$K) )
             {
-                $this->_fields[$K] = $V;
+                if( $K == 'dig-show-info' )
+                {
+                    $this->_page_opts['show_info'] = true;
+                }
+                else
+                {
+                    $this->_fields[$K] = $V;
+                }
             }
         }
 
@@ -449,15 +456,7 @@ function queries_to_no_script($queries)
                 if( !empty($R['file_page_url']) )
                 {
                     $tags = str_replace(',',', ',$R['upload_tags']);
-                    /*
-// '<a rel="license" href="%license_url%">
-//                 + '%upload_name%</span> by
-//       <a xmlns:cc="http://creativecommons.org/ns#" href="%file_page_url%"
-                
-                rel="cc:attributionURL">%user_real_name%</a> is licensed under a
-                <a rel="license" href="%license_url%">%license_name%</a>.';
 
-                    */
                     print "<li><a property=\"cc:attributionName\" href='{$R['file_page_url']}'>" .
                           '<span href="http://purl.org/dc/dcmitype/Sound" property="dc:title" rel="dc:type">' .
                           $R['upload_name'] . "</span></a> by " .
