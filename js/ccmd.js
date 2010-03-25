@@ -348,7 +348,7 @@ function result_actions(num) {
             + '</ul>';
 }
 
-function result_heading(result, num, max_name_length, featured) {    
+function result_heading(result, num, max_name_length, featured) {
 
     var user_url = DIG_ROOT_URL + '/dig?user=' + result.user_name;
     
@@ -408,8 +408,14 @@ function result_download(result, num) {
                + '&returl=' + encodeURIComponent(document.location)
                + '&rett=dig.ccMixter';
 
-	html += '<p><strong>If you use this track in a project, make sure to come back here '
-		  + 'and <a href="' + tb_url + '">' + str_let_us_know + '</a></strong></p>';	
+	html += '<p class="note"><strong>If you use this track in a project, make sure to come back here '
+		  + 'and <a href="' + tb_url + '">' + str_let_us_know + '</a></strong></p>';
+	
+	html += '<p class="embed-snippet"><label for="embed-snippet">Embed</label><textarea name="embed-snippet" id="embed-textarea-'+num+'" class="embed-textarea">';
+	
+	html += "&lt;style type=&quot;text/css&quot; media=&quot;screen&quot;&gt;@import url(&quot;"+DIG_ROOT_URL+"/css/embed.css&quot;);&lt;/style&gt;&lt;!--[if IE 7]&gt;&lt;style type=&quot;text/css&quot; media=&quot;screen&quot;&gt;@import url(&quot;"+DIG_ROOT_URL+"/css/embed-ie7.css&quot;);&lt;/style&gt;&lt;![endif]--&gt;&lt;!--[if IE 8]&gt;&lt;style type=&quot;text/css&quot; media=&quot;screen&quot;&gt;@import url(&quot;"+DIG_ROOT_URL+"/css/embed-ie8.css&quot;);&lt;/style&gt;&lt;![endif]--&gt;&lt;script src=&quot;http://mediaplayer.yahoo.com/js&quot; type=&quot;text/javascript&quot; charset=&quot;utf-8&quot;&gt;&lt;/script&gt;&lt;script src=&quot;"+DIG_ROOT_URL+"/js/ef.ymp.utilities.js&quot; type=&quot;text/javascript&quot;&lt;/script&gt;&lt;script src=&quot;"+DIG_ROOT_URL+"/js/ef.ymp.trackSeek.js&quot; type=&quot;text/javascript&quot;&gt;&lt;/script&gt;&lt;script type=&quot;text/javascript&quot; charset=&quot;utf-8&quot;&gt;var YMPParams = {defaultalbumart:&#x27;"+YMPParams.defaultalbumart+"&#x27;};&lt;/script&gt;&lt;div class=&quot;dig-track&quot;&gt;&lt;ul class=&quot;dig-action&quot;&gt;&lt;li&gt;&lt;a href=&quot;"+DIG_ROOT_URL+"/dig?ids="+result.upload_id+"&amp;dig-pane=info&quot; class=&quot;dig-info-link&quot;&gt;&lt;span&gt;Info&lt;/span&gt;&lt;/a&gt;&lt;/li&gt;&lt;/ul&gt;&lt;h4&gt;&lt;a href=&quot;"+result.files[0].download_url+"&quot;&gt;"+safe_upload_name(result.upload_name, 40)+"&lt;/a&gt;&lt;span class=&quot;dig-creator&quot;&gt;&amp;nbsp;by&amp;nbsp;&lt;a href=&quot;"+DIG_ROOT_URL+"/dig?user="+result.user_name+"&quot;&gt;"+result.user_name+"&lt;/a&gt;&lt;/span&gt;&lt;div class=&quot;dig-license&quot;&gt;&lt;a href=&quot;"+result.license_url+"&quot;&gt;&lt;img src=&quot;"+DIG_ROOT_URL+"/"+license_image(result.license_tag)+"&quot; alt=&quot;"+result.license_name+" Creative Commons License&quot; /&gt;&lt;/a&gt;&lt;/div&gt;&lt;/h4&gt;&lt;div class=&quot;dig-logo&quot;&gt;&lt;a href=&quot;"+DIG_ROOT_URL+"&quot;&gt;&lt;img src=&quot;"+DIG_ROOT_URL+"/images/embed-logo.jpg&quot; alt=&quot;dig.ccmixter &#x27;You already have permission&amp;hellip;&#x27;&quot; /&gt;&lt;/a&gt;&lt;/div&gt;&lt;div style=&quot;clear:both;&quot;&gt;&lt;/div&gt;&lt;/div&gt;";
+	
+	html += '</textarea></p>';
  
     html += '<p class="note">'+ str_to_download + ': ' + dl_instruct+'</p>';
     
@@ -579,7 +585,7 @@ function result_attribution(result, num) {
             + '</p>'
             + '<p>'
             +   'If you have a web page you can use this code snippet:'
-            + '<textarea class="attribution-snippet">' + snippet.replace('<','&lt;').replace('>','&gt;') + '</textarea>'
+            + '<textarea class="attribution-snippet" id="attribution-snippet-'+num+'">' + snippet.replace('<','&lt;').replace('>','&gt;') + '</textarea>'
             + '</p>'
             + '<p class="attribution-snippet-fmt round">' + snippet + '</p>'
             + '<div class="modal-nav-container">'
@@ -824,7 +830,6 @@ function edpickQueryResults(results) {
     _digStyleQueryResults(results,'#edpicks', 'More picks&hellip;', 'picks', str_editors_picks);
 }
 
-
 function popchartQueryResults(results) {
     _digStyleQueryResults(results,'#popchart', 'More popular&hellip;', 'popular', 'Popular');
 }
@@ -963,6 +968,8 @@ function _hookupEvents()
     var license = jQuery('.license');
     var license_more = jQuery('.license-more');
     var result_rows = jQuery('.result');
+	var embed_snippets = jQuery('.embed-textarea');
+	var attribution_snippets = jQuery('.attribution-snippet');
     
     /*
         adds a click action to all results' download links that brings up the download
@@ -1008,6 +1015,19 @@ function _hookupEvents()
         
         return false;
     });
+
+	embed_snippets.click(function(e) {
+		var id_num = jQuery(this).attr("id").split("-")[2];
+		var embed_textarea_id = "embed-textarea-"+id_num;
+		jQuery('#'+embed_textarea_id).select();
+	});
+	
+	attribution_snippets.click(function(e) {
+		var id_num = jQuery(this).attr("id").split("-")[2];
+		var attribution_id = "attribution-snippet-"+id_num;
+		jQuery('#'+attribution_id).select();
+	});
+	
     /*
         adds the cc license badge info reveal hover action
         and the permissions 'more' link click action that brings up
@@ -1052,7 +1072,12 @@ function _hookupEvents()
             onClose : dialogCloser
         });
     });
- 
+	
+	if(page_opts.show_pane) {
+		if(page_opts.show_pane == 'info') {
+			jQuery("#info-0").trigger('click');
+		}
+	}
 }
 
 function null_func() { }
@@ -1225,8 +1250,7 @@ function populate_dig()
         var regx = new RegExp( '\/' + page_opts['doc_url'] + '$');
         page_opts['post_back_url'] = page_opts['post_back_url'].replace(regx, '/' + val);
         page_opts['doc_url'] = val;
-    })
-
+    });
 }
 
 
@@ -1241,5 +1265,4 @@ jQuery(document).ready(function() {
     if(jQuery('#dig').length > 0) {
         populate_dig();
     }
-    
 });

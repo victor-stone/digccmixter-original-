@@ -185,10 +185,10 @@ class digQuery
         {
             if( preg_match('/^dig-/i',$K) )
             {
-                if( $K == 'dig-show-info' )
-                {
-                    $this->_page_opts['show_info'] = true;
-                }
+				if( $K == 'dig-pane' )
+				{
+					$this->_page_opts['show_pane'] = $V;
+				}
                 else
                 {
                     $this->_fields[$K] = $V;

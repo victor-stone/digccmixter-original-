@@ -27,7 +27,7 @@ body {
 	background: #FFF url(../images/bg.jpg) top left repeat-x;
 	margin: 0;
 	font-size: .85em;
-	font-family: "Helevetica", "Arial", sans-serif;
+	font-family: "Helvetica", "Arial", sans-serif;
 }
 a {
 	color: #3399CC;
@@ -699,7 +699,7 @@ a.ymp-btn-page-play em.ymp-skin, a.ymp-btn-page-pause em.ymp-skin {
 	color: #555;
 }
 .result h4 .result-creator a, .license-details a,
-.result-info h6, .result-info h6 a, .length {
+.result-info h6, .result-info h6 a, .length, .embed-snippet label {
 	color: #6B6C6E;
 }
 .license a {
@@ -845,17 +845,32 @@ a.ymp-btn-page-play em.ymp-skin, a.ymp-btn-page-pause em.ymp-skin {
 	color: #E1E2E5;
 	border: 1px solid #E1E2E5;
 }
-
 .download-list-container {
 	overflow: auto;
-	height: 200px;
+	height: 140px;
 }
 ol.download-list {
 	margin-left: 2em;
 }
-
+.embed-snippet label {
+	margin-right: 1em;
+	vertical-align: middle;
+}
+.embed-snippet textarea {
+	height: 1em;
+	width: 585px;
+	vertical-align: middle;
+	padding: 5px 0;
+	resize: none;
+}
 p.other_project_files {
     margin: 6px 0px 3px 3px;    
+}
+.attribution-snippet {
+	height: 1em;
+	width: 675px;
+	white-space: nowrap;
+	resize: none;
 }
 /** ------------------------------
     FEATURED
@@ -930,9 +945,6 @@ p.other_project_files {
 	margin-left: 50px;
 	line-height: 1.35em;
     font-family: serif;
-}
-textarea.attribution-snippet {
-    height: 3em;
 }
 
 .attribution-snippet-fmt {
