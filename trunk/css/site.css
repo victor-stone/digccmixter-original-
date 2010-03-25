@@ -862,6 +862,7 @@ ol.download-list {
 	vertical-align: middle;
 	padding: 5px 0;
 	resize: none;
+	overflow: hidden;
 }
 p.other_project_files {
     margin: 6px 0px 3px 3px;    
@@ -869,8 +870,9 @@ p.other_project_files {
 .attribution-snippet {
 	height: 1em;
 	width: 675px;
-	white-space: nowrap;
+	padding: 5px 0;
 	resize: none;
+	overflow: hidden;
 }
 /** ------------------------------
     FEATURED
