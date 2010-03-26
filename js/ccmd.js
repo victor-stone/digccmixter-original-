@@ -41,6 +41,7 @@ var str_at_ccmixter = '@ccMixter';
 var str_attribution = 'Attribution';
 var str_back = 'Back';
 var str_by = 'by';
+var str_chrome_control = 'Control-click on title and select &lsquo;Save Link As...&rsquo;';
 var str_click_here = 'Click here';
 var str_did_u_mean = 'Did you mean';
 var str_download = 'Download';
@@ -387,7 +388,9 @@ function get_dl_instruction()
         msie: str_IE_right
     };
     
-
+    if( /chrome/.test( navigator.userAgent.toLowerCase() ) )
+        return str_chrome_control;
+    
     var result = null;
     $.each( $.browser, function( agent, vers ) {
         if( map[agent] )
