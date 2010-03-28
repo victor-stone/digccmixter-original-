@@ -463,12 +463,15 @@ function result_download(result, num) {
 }
 
 function result_info(result, num) {
+    
+    var user_search_url = DIG_ROOT_URL + '/dig?user=' + result.user_name;
+        
     var html = '<div class="item">'
              +   '<div class="info-header" style="background-image: url('+result['user_avatar_url']+');">'
              +     '<h5><a href="'+result['file_page_url']+'">'+result['upload_name']
              +        '</a> <span class="length">'+result.files[0].file_format_info.ps+'</span>'
              +     '</h5>'
-             +     '<h6>'+str_by+' <a href="'+result['artist_page_url']+'">'+result['user_real_name']+'</a></h6>'
+             +     '<h6>'+str_by+' <a href="'+ user_search_url +'">'+result['user_real_name']+'</a></h6>'
              +     '<ul class="meta">';
                   
     if(result.upload_extra.featuring ) {        
@@ -497,7 +500,7 @@ function result_info(result, num) {
           + '<li>'+str_at_ccmixter+'</li>'
 	html += '<li><a href="' + result.artist_page_url + '" class="button-link">' + str_artist_profile + '</a></li>';
 	html += '<li><a href="' + history_url + '" class="button-link">' + str_sample_history + '</a></li>';
-	html += '<li><a href="' + tb_url + '" class="button-link">' + str_i_used_this + '</a></li>';
+//	html += '<li><a href="' + tb_url + '" class="button-link">' + str_i_used_this + '</a></li>';
 	html += '</ul>';
     html += '</div>';
     
