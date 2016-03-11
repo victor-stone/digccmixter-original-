@@ -1,0 +1,1 @@
+This is the source code to dig.ccmixter.org, a music discovery site aimed at non-musicians who are looking for music created by the ccmixter.org music community.
